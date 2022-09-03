@@ -7,7 +7,7 @@ const config: HardhatUserConfig = {
     localhost: {
       accounts: [ process.env.GOERLI_KEY ?? 'unknown' ]
     },
-    rinkeby: {
+    goerli: {
       url: process.env.GOERLI_URL ?? 'unknown',
       accounts: [ process.env.GOERLI_KEY ?? 'unknown' ]
     }
