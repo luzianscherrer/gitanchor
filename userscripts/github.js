@@ -8,21 +8,25 @@
 // @match        https://github.com/*
 // @icon         https://github.githubassets.com/pinned-octocat.svg
 // @grant        none
-// @require      https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js
+// @require      https://cdn.ethers.io/lib/ethers-5.2.umd.min.js
+// @require      https://raw.githubusercontent.com/luzianscherrer/gitanchor/main/userscripts/web3modal%401.9.8.js
 // @supportURL   https://github.com/luzianscherrer/gitanchor/issues
 // ==/UserScript==
 
-/* globals ethereum detectEthereumProvider */
+/* globals ethers web3Modal Web3Modal */
 
 (function () {
     'use strict';
 
+
     console.log('Hello GitAnchor');
 
     let accounts = [];
+    let provider;
+    let signer;
 
     const walletButtonHtml = `
-       <a href="" data-view-component="true" class="btn walletButton" style="margin-left: 5px;">Connect Wallet</a>
+       <a href="" data-view-component="true" class="btn walletButton" style="margin-left: 5px;">Connect wallet</a>
     `;
 
 
@@ -86,7 +90,6 @@
     }
 
     function inject() {
-        console.log('inject');
         if (location.href.match(/.\/commits/)) {
 
             var found = document.querySelectorAll("li.Box-row clipboard-copy");
@@ -102,7 +105,6 @@
             }
 
             var branchSelectMenu = document.querySelector("div.file-navigation");
-            console.log(branchSelectMenu);
             if (!branchSelectMenu.classList.contains("gitanchor")) {
                 var walletButton = htmlToElement(walletButtonHtml);
                 branchSelectMenu.appendChild(walletButton);
@@ -116,11 +118,30 @@
 
 
 
-
-
-                accounts = walletButton.addEventListener('click', function (e) {
+                accounts = walletButton.addEventListener('click', async function (e) {
                     console.log('click');
+
                     e.preventDefault();
+
+                    const providerOptions = {
+                    };
+
+                    const web3Modal = new Web3Modal.default({
+                        network: "goerli",
+                        cacheProvider: true,
+                        providerOptions
+                    });
+
+                    const instance = await web3Modal.connect();
+                    provider = new ethers.providers.Web3Provider(instance);
+                    signer = provider.getSigner();
+
+                    const accounts = await provider.listAccounts();
+                    const network = await provider.getNetwork();
+
+                    console.log(accounts);
+                    console.log(network);
+
                 });
 
             }
