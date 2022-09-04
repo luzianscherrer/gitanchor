@@ -24,6 +24,7 @@
     let accounts = [];
     let provider;
     let signer;
+    let web3Modal;
 
     const walletButtonHtml = `
        <a href="" data-view-component="true" class="btn walletButton" style="margin-left: 5px;">Connect wallet</a>
@@ -81,12 +82,61 @@
         </div>
     `;
 
+    function subscribeToProviderEvents() {
+        console.log('subscribeToProviderEvents on', provider);
+
+        provider.on("accountsChanged", (accounts) => {
+            console.log(accounts);
+        });
+
+        provider.on("chainChanged", (chainId) => {
+            console.log(chainId);
+        });
+
+        provider.on("connect", (info) => {
+            console.log(info);
+        });
+
+        provider.on("disconnect", (error) => {
+            console.log(error);
+        });
+    }
 
     function htmlToElement(html) {
         var template = document.createElement('template');
         html = html.trim();
         template.innerHTML = html;
         return template.content.firstChild;
+    }
+
+    async function disconnectWallet() {
+        console.log('disconnect');
+        await web3Modal.clearCachedProvider();
+
+        let walletButton = document.querySelector('.walletButton');
+        walletButton.textContent = 'Connect wallet';
+        walletButton.classList.add("walletDisconnected");
+        walletButton.classList.remove("walletConnected");
+    }
+
+    async function connectWallet() {
+        const instance = await web3Modal.connect();
+        provider = new ethers.providers.Web3Provider(instance);
+        signer = provider.getSigner();
+
+        const accounts = await provider.listAccounts();
+        const network = await provider.getNetwork();
+
+        console.log(accounts);
+        console.log(network);
+
+        subscribeToProviderEvents();
+
+        let walletButton = document.querySelector('.walletButton');
+        walletButton.textContent = 'Disconnect wallet';
+        walletButton.classList.add("walletConnected");
+        walletButton.classList.remove("walletDisconnected");
+
     }
 
     function inject() {
@@ -107,6 +157,7 @@
             var branchSelectMenu = document.querySelector("div.file-navigation");
             if (!branchSelectMenu.classList.contains("gitanchor")) {
                 var walletButton = htmlToElement(walletButtonHtml);
+                walletButton.classList.add("walletDisconnected");
                 branchSelectMenu.appendChild(walletButton);
                 branchSelectMenu.classList.add("gitanchor");
 
@@ -115,32 +166,30 @@
                 branchSelectMenu.classList.add("flex-items-start");
 
 
+                const providerOptions = {
+                };
 
+                web3Modal = new Web3Modal.default({
+                    network: "goerli",
+                    cacheProvider: true,
+                    providerOptions
+                });
 
+                if (web3Modal.cachedProvider) {
+                    console.log('cached provider', web3Modal.cachedProvider);
+                    connectWallet();
+                }
 
                 accounts = walletButton.addEventListener('click', async function (e) {
                     console.log('click');
 
                     e.preventDefault();
 
-                    const providerOptions = {
-                    };
-
-                    const web3Modal = new Web3Modal.default({
-                        network: "goerli",
-                        cacheProvider: true,
-                        providerOptions
-                    });
-
-                    const instance = await web3Modal.connect();
-                    provider = new ethers.providers.Web3Provider(instance);
-                    signer = provider.getSigner();
-
-                    const accounts = await provider.listAccounts();
-                    const network = await provider.getNetwork();
-
-                    console.log(accounts);
-                    console.log(network);
+                    if (walletButton.classList.contains("walletDisconnected")) {
+                        await connectWallet();
+                    } else {
+                        await disconnectWallet();
+                    }
 
                 });
 
