@@ -1,11 +1,15 @@
 // ==UserScript==
 // @name         GitAnchor
-// @author       Luzian Scherrer
 // @version      1.0
+// @description  Extend GitHub with UI components to interact with GitAnchor
+// @license      MIT
+// @author       Luzian Scherrer
+// @namespace    https://github.com/luzianscherrer
 // @match        https://github.com/*commits/*
-// @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
+// @icon         https://github.githubassets.com/pinned-octocat.svg
 // @grant        none
 // @require      https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js
+// @supportURL   https://github.com/luzianscherrer/gitanchor/issues
 // ==/UserScript==
 
 
