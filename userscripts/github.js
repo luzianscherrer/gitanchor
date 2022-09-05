@@ -32,6 +32,32 @@
        <a href="" data-view-component="true" class="btn walletButton" style="margin-left: 5px;">Connect wallet</a>
     `;
 
+    const blockchainLabelHtml = `
+        <div class="ml-3">
+
+            <svg class="octicon blockchainLogoEthereum" style="display: none;" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                <g transform="matrix(0.0361991,0,0,0.0362812,-1.30317,-1.23356)">
+                    <path d="M256,362L256,469L387,284L256,362Z" style="fill:rgb(60,60,59);fill-rule:nonzero;"/>
+                </g>
+                <g transform="matrix(0.0361991,0,0,0.0362812,-1.30317,-1.23356)">
+                    <path d="M256,41L387,259L256,337L124,259" style="fill:rgb(52,52,52);fill-rule:nonzero;"/>
+                </g>
+                <g transform="matrix(0.0361991,0,0,0.0362812,-1.30317,-1.23356)">
+                    <path d="M256,41L256,199L124,259M124,284L256,362L256,469" style="fill:rgb(140,140,140);fill-rule:nonzero;"/>
+                </g>
+                <g transform="matrix(0.0361991,0,0,0.0362812,-1.30317,-1.23356)">
+                    <path d="M256,199L256,337L387,259" style="fill:rgb(20,20,20);fill-rule:nonzero;"/>
+                </g>
+                <g transform="matrix(0.0361991,0,0,0.0362812,-1.30317,-1.23356)">
+                    <path d="M124,259L256,199L256,337" style="fill:rgb(57,57,57);fill-rule:nonzero;"/>
+                </g>
+            </svg>
+
+            <strong class="blockchainTitle"></strong>
+            <span class="color-fg-muted blockchainSubtitle"></span>
+        </div>
+    `;
+
 
     const anchorObject = `
         <div data-view-component="true" class="BtnGroup">
@@ -111,6 +137,11 @@
         return template.content.firstChild;
     }
 
+    function truncateEthereumAddressString(addressString) {
+        if (addressString.length <= 12) return addressString;
+        return addressString.substr(0, 5) + '...' + addressString.substr(addressString.length - 4);
+    };
+
     async function disconnectWallet() {
         console.log('disconnect');
         await web3Modal.clearCachedProvider();
@@ -119,6 +150,15 @@
         walletButton.textContent = 'Connect wallet';
         walletButton.classList.add("walletDisconnected");
         walletButton.classList.remove("walletConnected");
+
+        let blockchainTitle = document.querySelector('.blockchainTitle');
+        blockchainTitle.textContent = '';
+        let blockchainSubtitle = document.querySelector('.blockchainSubtitle');
+        blockchainSubtitle.textContent = '';
+
+        let blockchainLogoEthereum = document.querySelector('.blockchainLogoEthereum');
+        blockchainLogoEthereum.style.display = 'none';
+
     }
 
     async function connectWallet() {
@@ -138,6 +178,23 @@
         walletButton.textContent = 'Disconnect wallet';
         walletButton.classList.add("walletConnected");
         walletButton.classList.remove("walletDisconnected");
+
+        let blockchainTitle = document.querySelector('.blockchainTitle');
+        let blockchainSubtitle = document.querySelector('.blockchainSubtitle');
+        let blockchainLogoEthereum = document.querySelector('.blockchainLogoEthereum');
+        blockchainLogoEthereum.style.display = 'none';
+
+        switch (network.chainId) {
+            case 5:
+                blockchainTitle.textContent = 'Ethereum Görli';
+                blockchainSubtitle.textContent = truncateEthereumAddressString(accounts[0]);
+                blockchainLogoEthereum.style.display = 'inline';
+                break;
+            default:
+                blockchainTitle.textContent = 'Warning';
+                blockchainSubtitle.textContent = 'unsupported network';
+                break;
+        }
 
     }
 
@@ -161,12 +218,13 @@
                 var walletButton = htmlToElement(walletButtonHtml);
                 walletButton.classList.add("walletDisconnected");
                 branchSelectMenu.appendChild(walletButton);
+                branchSelectMenu.appendChild(htmlToElement(blockchainLabelHtml));
                 branchSelectMenu.classList.add("gitanchor");
 
                 branchSelectMenu.classList.add("mb-3");
                 branchSelectMenu.classList.add("d-flex");
                 branchSelectMenu.classList.add("flex-items-start");
-
+                branchSelectMenu.classList.add("flex-items-center");
 
                 const providerOptions = {
                 };
