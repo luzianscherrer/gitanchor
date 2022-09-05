@@ -9,9 +9,11 @@
 // @icon         https://github.githubassets.com/pinned-octocat.svg
 // @grant        none
 // @require      https://cdn.ethers.io/lib/ethers-5.2.umd.min.js
-// @require      https://raw.githubusercontent.com/luzianscherrer/gitanchor/main/userscripts/web3modal%401.9.8.js
+// @require      https://raw.githubusercontent.com/luzianscherrer/gitanchor/main/userscripts/lib/web3modal%401.9.8.js
 // @supportURL   https://github.com/luzianscherrer/gitanchor/issues
 // ==/UserScript==
+
+// web3modal is copied and included in my repository with full path to index.js.map because of https://bugzilla.mozilla.org/show_bug.cgi?id=1437937
 
 /* globals ethers web3Modal Web3Modal */
 
