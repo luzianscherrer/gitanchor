@@ -28,6 +28,7 @@ This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.co
 
 - Polygon blockchain support
 - Optimism blockchain support
+- Cronos blockchain support
 - Web app to set and verify anchors
 - Commandline tool to set and verify anchors
 - Integrate with [The Graph](https://thegraph.com/) to be able to link the emitted events on [Etherscan](https://etherscan.io)
