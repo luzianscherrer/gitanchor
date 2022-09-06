@@ -29,7 +29,7 @@ async function main() {
     rl.close()
 
     const GitAnchor = await ethers.getContractFactory("GitAnchor");
-    const gitAnchor = await GitAnchor.attach(contractAddress);
+    const gitAnchor = GitAnchor.attach(contractAddress);
 
     const tx = await gitAnchor.setAnchor(hashToAnchor);
     const receipt = await tx.wait();

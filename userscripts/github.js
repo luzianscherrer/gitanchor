@@ -30,6 +30,14 @@
     let blockchainAccounts;
     let network;
     let web3Modal;
+    let anchorContract;
+
+    const anchorContractAddress = '0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95';
+
+    const anchorContractAbi = [
+        "function getAnchor(string memory anchorHash) public view returns (uint256, address)"
+    ];
+
 
     const walletButtonHtml = `
        <a href="" data-view-component="true" class="btn walletButton" style="margin-left: 5px;">Connect wallet</a>
@@ -70,14 +78,13 @@
     `;
 
 
-    const anchorObject = `
-        <div data-view-component="true" class="BtnGroup">
-            <details class="details-reset details-overlay mr-0 mb-0 " id="branch-select-menu">
+    const anchorObjectHtml = `
+        <div data-view-component="true" class="BtnGroup anchorOject">
+            <details class="details-reset details-overlay mr-0 mb-0 " >
                 <summary class="btn css-truncate" title="GitAnchor">
 
 
-                    <!--
-                    <svg class="octicon" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                    <svg class="octicon anchorAvailable" style="display: none;" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                         <g id="Green-Icon" serif:id="Green Icon" transform="matrix(0.03125,0,0,0.03125,0,0)">
                             <g id="Green-Circle" serif:id="Green Circle" transform="matrix(1.18415,0,0,1.18415,-0.368298,-3.92075)">
                                 <path d="M370.966,70.814C408.148,109.345 431,161.775 431,219.5C431,337.886 334.886,434 216.5,434C98.114,434 2,337.886 2,219.5C2,101.114 98.114,5 216.5,5C234.27,5 251.538,7.165 268.064,11.265C266.035,13.735 264.188,16.401 262.542,19.253C248.243,44.019 253.638,74.801 273.77,93.478L263.166,109.022L242.029,96.818C241.98,84.978 235.969,73.451 224.98,67.106C208.543,57.617 187.46,63.266 177.97,79.702C168.481,96.139 174.13,117.222 190.566,126.712C201.556,133.057 214.544,132.499 224.822,126.621L243.717,137.53L138.702,291.478C116.695,271.54 102.056,245.793 97.162,218.549L137.342,213.117C139.713,212.797 141.837,211.51 143.218,209.565C144.6,207.601 145.1,205.169 144.613,202.83C143.325,196.663 131.157,142.083 102.002,125.25C93.777,120.501 83.247,123.323 78.498,131.548C64.169,156.366 58.331,184.974 61.628,214.177C66.216,257.367 90.078,298.354 127.006,326.569C133.33,331.462 140.033,335.957 146.932,339.941C153.489,343.726 160.657,347.278 168.381,350.556C242.532,381.267 325.614,357.38 361.623,295.011C366.372,286.785 363.55,276.255 355.325,271.506C326.17,254.674 272.818,271.426 266.833,273.395C264.564,274.141 262.708,275.791 261.698,277.97C260.705,280.138 260.652,282.621 261.56,284.834L276.949,322.359C251.507,331.463 221.799,332.143 192.961,322.934L273.833,154.917L292.728,165.826C292.776,177.666 298.787,189.193 309.777,195.538C326.213,205.027 347.297,199.378 356.786,182.942C366.276,166.506 360.626,145.422 344.19,135.933C333.2,129.588 320.212,130.146 309.934,136.023L288.797,123.82L296.957,106.864C323.197,114.961 352.552,104.242 366.851,79.476C368.478,76.659 369.85,73.763 370.966,70.814Z" style="fill:rgb(146,232,169);"/>
@@ -90,10 +97,9 @@
                             </g>
                         </g>
                     </svg>
-                    -->
 
 
-                    <svg class="octicon" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                    <svg class="octicon anchorNotAvailable" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                         <g id="Gray-Circle" serif:id="Gray Circle" transform="matrix(0.0370047,0,0,0.0370047,-0.0115093,-0.122523)">
                             <circle cx="216.5" cy="219.5" r="214.5" style="fill:rgb(198,203,208);"/>
                         </g>
@@ -203,7 +209,6 @@
                 blockchainTitle.textContent = 'Ethereum Görli';
                 blockchainSubtitle.textContent = truncateEthereumAddressString(blockchainAccounts[0]);
                 blockchainLogo = document.querySelector('.blockchainLogoEthereum');
-                console.log('debug', blockchainLogo);
                 blockchainLogo.style.display = 'inline';
                 break;
             case 80001:
@@ -225,6 +230,7 @@
         signer = provider.getSigner();
         blockchainAccounts = await provider.listAccounts();
         network = await provider.getNetwork();
+        anchorContract = new ethers.Contract(anchorContractAddress, anchorContractAbi, signer);
     }
 
     async function connectWallet() {
@@ -235,6 +241,23 @@
 
         updateWalletConnectionDisplay();
 
+        fetchAnchorsFromBlockchain();
+
+    }
+
+    async function fetchAnchorsFromBlockchain() {
+        console.log('fetch anchors');
+        let anchors = document.querySelectorAll(".anchorOject");
+        console.log('fetch anchors for', anchors);
+        for(const anchor of anchors) {
+            //console.log('fetching anchor for', anchor);
+            const value = await anchorContract.getAnchor(anchor.value);
+            if(value[0].toNumber() !== 0) {
+                console.log('found anchor for :', anchor);
+                anchor.querySelector('.anchorNotAvailable').style.display = 'none';
+                anchor.querySelector('.anchorAvailable').style.display = 'inline';
+            }
+        }
     }
 
     function inject() {
@@ -242,11 +265,13 @@
 
             var found = document.querySelectorAll("li.Box-row clipboard-copy");
             for (var selector of found) {
-                // selector.value is the hash hash
                 var container = selector.closest('div.BtnGroup');
 
                 if (!container.classList.contains("gitanchor")) {
-                    container.after(htmlToElement(anchorObject));
+                    let anchorOject = htmlToElement(anchorObjectHtml);
+                    anchorOject.value = selector.value;
+                    container.after(anchorOject);
+                    console.log('debug adding anchor button for hash', anchorOject.value);
                     container.classList.add("gitanchor");
                 }
 
