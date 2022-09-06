@@ -249,15 +249,17 @@
         console.log('fetch anchors');
         let anchors = document.querySelectorAll(".anchorOject");
         console.log('fetch anchors for', anchors);
-        for(const anchor of anchors) {
+        for (const anchor of anchors) {
             //console.log('fetching anchor for', anchor);
-            const value = await anchorContract.getAnchor(anchor.value);
-            if(value[0].toNumber() !== 0) {
-                console.log('found anchor for :', anchor);
-                anchor.querySelector('.anchorNotAvailable').style.display = 'none';
-                anchor.querySelector('.anchorAvailable').style.display = 'inline';
-            }
+            anchorContract.getAnchor(anchor.value).then(function (value, err) {
+                if (value[0].toNumber() !== 0) {
+                    console.log('found anchor for :', anchor);
+                    anchor.querySelector('.anchorNotAvailable').style.display = 'none';
+                    anchor.querySelector('.anchorAvailable').style.display = 'inline';
+                }
+            });
         }
+
     }
 
     function inject() {
