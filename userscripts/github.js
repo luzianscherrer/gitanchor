@@ -24,8 +24,11 @@
     console.log('Hello GitAnchor');
 
     let accounts = [];
+    let connection;
     let provider;
     let signer;
+    let blockchainAccounts;
+    let network;
     let web3Modal;
 
     const walletButtonHtml = `
@@ -35,7 +38,15 @@
     const blockchainLabelHtml = `
         <div class="ml-3">
 
-            <svg class="octicon blockchainLogoEthereum" style="display: none;" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+
+            <svg class="octicon blockchainLogo blockchainLogoPolygon" style="display: none;" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                <g transform="matrix(0.406753,0,0,0.406753,0.190348,1.18689)">
+                    <path d="M29,10.2C28.3,9.8 27.4,9.8 26.6,10.2L21,13.5L17.2,15.6L11.7,18.9C11,19.3 10.1,19.3 9.3,18.9L5,16.3C4.3,15.9 3.8,15.1 3.8,14.2L3.8,9.2C3.8,8.4 4.2,7.6 5,7.1L9.3,4.6C10,4.2 10.9,4.2 11.7,4.6L16,7.2C16.7,7.6 17.2,8.4 17.2,9.3L17.2,12.6L21,10.4L21,7C21,6.2 20.6,5.4 19.8,4.9L11.8,0.2C11.1,-0.2 10.2,-0.2 9.4,0.2L1.2,5C0.4,5.4 0,6.2 0,7L0,16.4C0,17.2 0.4,18 1.2,18.5L9.3,23.2C10,23.6 10.9,23.6 11.7,23.2L17.2,20L21,17.8L26.5,14.6C27.2,14.2 28.1,14.2 28.9,14.6L33.2,17.1C33.9,17.5 34.4,18.3 34.4,19.2L34.4,24.2C34.4,25 34,25.8 33.2,26.3L29,28.8C28.3,29.2 27.4,29.2 26.6,28.8L22.3,26.3C21.6,25.9 21.1,25.1 21.1,24.2L21.1,21L17.3,23.2L17.3,26.5C17.3,27.3 17.7,28.1 18.5,28.6L26.6,33.3C27.3,33.7 28.2,33.7 29,33.3L37.1,28.6C37.8,28.2 38.3,27.4 38.3,26.5L38.3,17C38.3,16.2 37.9,15.4 37.1,14.9L29,10.2Z" style="fill:rgb(130,71,229);fill-rule:nonzero;"/>
+                </g>
+            </svg>
+
+
+            <svg class="octicon blockchainLogo blockchainLogoEthereum" style="display: none;" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                 <g transform="matrix(0.0361991,0,0,0.0362812,-1.30317,-1.23356)">
                     <path d="M256,362L256,469L387,284L256,362Z" style="fill:rgb(60,60,59);fill-rule:nonzero;"/>
                 </g>
@@ -110,22 +121,28 @@
         </div>
     `;
 
-    function subscribeToProviderEvents() {
-        console.log('subscribeToProviderEvents on', provider);
+    function subscribeToConnectionEvents() {
+        console.log('subscribeToConnectionEvents on', provider);
 
-        provider.on("accountsChanged", (accounts) => {
+        connection.on("accountsChanged", (accounts) => {
+            console.log('accountsChanged');
             console.log(accounts);
         });
 
-        provider.on("chainChanged", (chainId) => {
+        connection.on("chainChanged", async (chainId) => {
+            console.log('chainChanged');
             console.log(chainId);
+            await updateConnectionState();
+            await updateWalletConnectionDisplay();
         });
 
-        provider.on("connect", (info) => {
+        connection.on("connect", (info) => {
+            console.log('connect');
             console.log(info);
         });
 
-        provider.on("disconnect", (error) => {
+        connection.on("disconnect", (error) => {
+            console.log('disconnect');
             console.log(error);
         });
     }
@@ -156,23 +173,17 @@
         let blockchainSubtitle = document.querySelector('.blockchainSubtitle');
         blockchainSubtitle.textContent = '';
 
-        let blockchainLogoEthereum = document.querySelector('.blockchainLogoEthereum');
-        blockchainLogoEthereum.style.display = 'none';
+        let blockchainLogos = document.querySelectorAll('.blockchainLogo');
+        blockchainLogos.forEach(element => {
+            element.style.display = 'none';
+        });
 
     }
 
-    async function connectWallet() {
-        const instance = await web3Modal.connect();
-        provider = new ethers.providers.Web3Provider(instance);
-        signer = provider.getSigner();
+    async function updateWalletConnectionDisplay() {
 
-        const accounts = await provider.listAccounts();
-        const network = await provider.getNetwork();
-
-        console.log(accounts);
-        console.log(network);
-
-        subscribeToProviderEvents();
+        console.log('accounts:', blockchainAccounts);
+        console.log('network:', network);
 
         let walletButton = document.querySelector('.walletButton');
         walletButton.textContent = 'Disconnect wallet';
@@ -181,20 +192,48 @@
 
         let blockchainTitle = document.querySelector('.blockchainTitle');
         let blockchainSubtitle = document.querySelector('.blockchainSubtitle');
-        let blockchainLogoEthereum = document.querySelector('.blockchainLogoEthereum');
-        blockchainLogoEthereum.style.display = 'none';
+        let blockchainLogos = document.querySelectorAll('.blockchainLogo');
+        blockchainLogos.forEach(element => {
+            element.style.display = 'none';
+        });
 
+        let blockchainLogo;
         switch (network.chainId) {
             case 5:
                 blockchainTitle.textContent = 'Ethereum Görli';
-                blockchainSubtitle.textContent = truncateEthereumAddressString(accounts[0]);
-                blockchainLogoEthereum.style.display = 'inline';
+                blockchainSubtitle.textContent = truncateEthereumAddressString(blockchainAccounts[0]);
+                blockchainLogo = document.querySelector('.blockchainLogoEthereum');
+                console.log('debug', blockchainLogo);
+                blockchainLogo.style.display = 'inline';
+                break;
+            case 80001:
+                blockchainTitle.textContent = 'Polygon Mumbai';
+                blockchainSubtitle.textContent = truncateEthereumAddressString(blockchainAccounts[0]);
+                blockchainLogo = document.querySelector('.blockchainLogoPolygon');
+                blockchainLogo.style.display = 'inline';
                 break;
             default:
                 blockchainTitle.textContent = 'Warning';
                 blockchainSubtitle.textContent = 'unsupported network';
                 break;
         }
+
+    }
+
+    async function updateConnectionState() {
+        provider = new ethers.providers.Web3Provider(connection);
+        signer = provider.getSigner();
+        blockchainAccounts = await provider.listAccounts();
+        network = await provider.getNetwork();
+    }
+
+    async function connectWallet() {
+        connection = await web3Modal.connect();
+        await updateConnectionState();
+
+        subscribeToConnectionEvents();
+
+        updateWalletConnectionDisplay();
 
     }
 
