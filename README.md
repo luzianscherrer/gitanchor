@@ -2,7 +2,7 @@
 
 ## Introduction
 
-With GitAnchor every Git (and GitHub) commit can be made permanent and proofable by anchoring it in the blockchain. Using smart contract technology anchors are immutable and therefore proof that a repository at any given commit state has existed at the time when the anchor was set.
+With GitAnchor every Git (and GitHub) commit can be made permanent and provable by anchoring it in the blockchain. Using smart contract technology anchors are immutable and therefore proof that a repository at any given commit state has existed at the time when the anchor was set.
 
 A GitAnchor consist of the commit hash as well as the timestamp when the anchor was set and the wallet address of the person who was setting the anchor.
 
