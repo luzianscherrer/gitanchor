@@ -30,6 +30,7 @@ This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.co
 - Optimism blockchain support
 - Web app to set and verify anchors
 - Commandline tool to set and verify anchors
+- Integrate with [The Graph](https://thegraph.com/) to be able to link the emitted events on [Etherscan](https://etherscan.io)
 - [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) integration for the commandline tool
 - [GitHub Actions](https://github.com/features/actions) integration
 
