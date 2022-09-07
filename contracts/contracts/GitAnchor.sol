@@ -12,10 +12,11 @@ contract GitAnchor {
     mapping(string => Anchor) anchors;
 
     /// @notice Event when an anchor has been stored
-    /// @param anchorHash The anchor's hash
-    /// @param anchorTimestamp The anchor's timestamp
+    /// @param anchorHashIndexed The hash of the anchor
+    /// @param anchorHashReadable Again the hash of the anchor, required because the indexed anchorHash (anchorHashIndexed) will only be available as keccak256 hash in the logs
+    /// @param anchorTimestamp The timestamp of the anchor
     /// @param anchorOrigin The EOA of the creator of the anchor
-    event Anchored(string anchorHash, uint256 anchorTimestamp, address anchorOrigin);
+    event Anchored(string indexed anchorHashIndexed, string anchorHashReadable, uint256 indexed anchorTimestamp, address indexed anchorOrigin);
 
     constructor() {
     }
@@ -41,6 +42,6 @@ contract GitAnchor {
         require(!isAnchored(anchorHash), 'Anchor already set');
         Anchor memory _anchor = Anchor(block.timestamp, tx.origin);
         anchors[anchorHash] = _anchor;
-        emit Anchored(anchorHash, _anchor.timestamp, _anchor.origin);
+        emit Anchored(anchorHash, anchorHash, _anchor.timestamp, _anchor.origin);
     }
 }

@@ -35,7 +35,8 @@
     const anchorContractAddress = '0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95';
 
     const anchorContractAbi = [
-        "function getAnchor(string memory anchorHash) public view returns (uint256, address)"
+        "function getAnchor(string memory anchorHash) public view returns (uint256, address)",
+        "function setAnchor(string memory anchorHash) public"
     ];
 
 
@@ -83,7 +84,6 @@
             <details class="details-reset details-overlay mr-0 mb-0 " >
                 <summary class="btn css-truncate" title="GitAnchor">
 
-
                     <svg class="octicon anchorAvailable" style="display: none;" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                         <g id="Green-Icon" serif:id="Green Icon" transform="matrix(0.03125,0,0,0.03125,0,0)">
                             <g id="Green-Circle" serif:id="Green Circle" transform="matrix(1.18415,0,0,1.18415,-0.368298,-3.92075)">
@@ -105,23 +105,50 @@
                         </g>
                     </svg>
 
-
-
-                    <span class="css-truncate-target" data-menu-button="">GitAnchor</span>
+                    <!--
+                    <span class="css-truncate-target" data-menu-button=""></span>
+                    -->
                     <span class="dropdown-caret"></span>
                 </summary>
 
-                <div class="SelectMenu">
-                    <div class="SelectMenu-modal">
-                        <header class="SelectMenu-header">
-                            <span class="SelectMenu-title">Anchor not set</span>
-                        </header>
 
-                        <footer class="SelectMenu-footer"><a href="#">Set anchor now</a>
-                        </footer>
+<div class="anim-scale-in anchorAvailableDetails" style="display: none; position: relative; z-index: 200;">
+    <div class="dropdown-menu dropdown-menu-s py-0 color-fg-default text-left">
+        <div class="p-3 signed-commit-header d-flex">
+            <div class="flex-1 anchorAvailableDetailsText">
+                This commit has been anchored.
+            </div>
+        </div>
 
-                    </div>
-                </div>
+        <div class="signed-commit-footer p-3 rounded-bottom-2">
+            <span class="d-block">Network: <br/><span class="color-fg-muted">Ethereum Görli</span></span>
+            <div class="my-1">
+            </div>
+            <a href="https://goerli.etherscan.io/address/0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95">View anchor details</a>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="anim-scale-in anchorNotAvailableDetails" style="position: relative; z-index: 200;">
+    <div class="dropdown-menu dropdown-menu-s py-0 color-fg-default text-left">
+        <div class="p-3 signed-commit-header d-flex">
+            <div class="flex-1">
+                This commit is not anchored.
+            </div>
+        </div>
+
+        <div class="signed-commit-footer p-3 rounded-bottom-2">
+            <span class="d-block">Network: <br/><span class="color-fg-muted">Ethereum Görli</span></span>
+            <div class="my-1">
+            </div>
+            <div class="btn anchorNotAvailableCreateAnchorButton">Create anchor</div>
+        </div>
+    </div>
+</div>
+
+
 
             </details>
         </div>
@@ -249,14 +276,40 @@
         console.log('fetch anchors');
         let anchors = document.querySelectorAll(".anchorOject");
         console.log('fetch anchors for', anchors);
+        let contract = anchorContract;
         for (const anchor of anchors) {
             //console.log('fetching anchor for', anchor);
-            anchorContract.getAnchor(anchor.value).then(function (value, err) {
+            contract.getAnchor(anchor.value).then(function (value, err) {
                 if (value[0].toNumber() !== 0) {
                     console.log('found anchor for :', anchor);
                     anchor.querySelector('.anchorNotAvailable').style.display = 'none';
                     anchor.querySelector('.anchorAvailable').style.display = 'inline';
+
+                    anchor.querySelector('.anchorNotAvailableDetails').style.display = 'none';
+                    anchor.querySelector('.anchorAvailableDetails').style.display = 'block';
+
+                    let displayDate = new Date(value[0].toNumber() * 1000).toLocaleString(navigator.language, {
+                        year: 'numeric',
+                        month: '2-digit',
+                        day: '2-digit',
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        second: '2-digit',
+                    });
+                    anchor.querySelector('.anchorAvailableDetailsText').innerHTML = 'This commit has been anchored on ' + displayDate + '.';
+
+                } else {
+                    anchor.querySelector('.anchorNotAvailableCreateAnchorButton').addEventListener('click', async function (e) {
+                        console.log('set anchor');
+
+                        e.preventDefault();
+
+                        const tx = await contract.setAnchor(anchor.value);
+                        const receipt = await tx.wait();
+
+                    });
                 }
+
             });
         }
 

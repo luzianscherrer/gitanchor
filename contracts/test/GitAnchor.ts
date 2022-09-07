@@ -57,7 +57,7 @@ describe("GitAnchor", function () {
 
     await expect(gitAnchor.setAnchor(hash))
       .to.emit(gitAnchor, "Anchored")
-      .withArgs(hash, time.latestBlock, signer.address);
+      .withArgs(hash, hash, time.latestBlock, signer.address);
 
   });
 
