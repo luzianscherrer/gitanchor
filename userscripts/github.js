@@ -34,10 +34,10 @@
         "function setAnchor(string memory anchorHash) public"
     ];
     const gitAnchorSupportedNetworks = [
-        { chainId: 1, chainName: 'Ethereum Mainnet', chainLogo: 'gitanchor-blockchain-logo-ethereum', chainExplorer: 'https://etherscan.io', contractAddress: '0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95' },
         { chainId: 5, chainName: 'Ethereum Görli', chainLogo: 'gitanchor-blockchain-logo-ethereum', chainExplorer: 'https://goerli.etherscan.io', contractAddress: '0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95' },
-        { chainId: 80001, chainName: 'Polygon Mumbai', chainLogo: 'gitanchor-blockchain-logo-polygon', chainExplorer: 'https://mumbai.polygonscan.com/', contractAddress: '0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95' }
+        { chainId: 80001, chainName: 'Polygon Mumbai', chainLogo: 'gitanchor-blockchain-logo-polygon', chainExplorer: 'https://mumbai.polygonscan.com/', contractAddress: '0x9A37F4491Fe7aF13e624F74e444DBCce5aD59Bec' }
     ];
+    // { chainId: 1, chainName: 'Ethereum Mainnet', chainLogo: 'gitanchor-blockchain-logo-ethereum', chainExplorer: 'https://etherscan.io', contractAddress: '0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95' },
 
     const gitAnchorWalletButtonHtml = `
         <a href="" data-view-component="true" class="btn gitanchor-wallet-button" style="margin-left: 5px;">Connect wallet</a>
