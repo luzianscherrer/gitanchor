@@ -89,7 +89,7 @@
             <details class="details-reset details-overlay mr-0 mb-0 ">
                 <summary class="btn css-truncate" title="GitAnchor">
 
-                    <svg class="octicon gitanchor-anchor-icon-status anchorAvailable" style="display: none;" height="16" viewBox="0 0 16 16" version="1.1"
+                    <svg class="octicon gitanchor-anchor-icon-status gitanchor-anchor-icon-status-available" style="display: none;" height="16" viewBox="0 0 16 16" version="1.1"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
                         xmlns:serif="http://www.serif.com/"
                         style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
@@ -116,7 +116,7 @@
                     </svg>
 
 
-                    <svg class="octicon gitanchor-anchor-icon-status anchorNotAvailable" style="display: none;" height="16" viewBox="0 0 16 16" version="1.1"
+                    <svg class="octicon gitanchor-anchor-icon-status gitanchor-anchor-icon-status-not-available" style="display: none;" height="16" viewBox="0 0 16 16" version="1.1"
                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"
                         xmlns:serif="http://www.serif.com/"
                         style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
@@ -127,16 +127,16 @@
                     </svg>
 
 
-                    <svg height="16" class="octicon gitanchor-anchor-icon-status anchorUnknown" style="display: none;" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-                        <g id="Gray-Circle" serif:id="Gray Circle" transform="matrix(0.0370047,0,0,0.0370047,-0.0115093,-0.122523)">
-                            <circle cx="216.5" cy="219.5" r="214.5" style="fill:rgb(198,203,208);"/>
+                    <svg height="16" class="octicon gitanchor-anchor-icon-status gitanchor-anchor-icon-status-unknown" style="display: none;" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                        <g transform="matrix(0.03125,0,0,0.03125,-0.375,0.21875)">
+                            <circle cx="268" cy="249" r="167"/>
                         </g>
-                        <g id="Question-Mark" serif:id="Question Mark" transform="matrix(0.107696,0,0,0.107696,-15.1504,-8.89242)">
-                            <text x="171.893px" y="207.746px" style="font-family:'Helvetica-Bold', 'Helvetica';font-weight:700;font-size:140px;fill:rgb(93,93,93);">?</text>
+                        <g id="Fill-193" transform="matrix(0.345109,0,0,0.345109,0.0613266,0.0616027)">
+                            <path d="M26.489,22.695C24.599,23.808 24.057,24.585 24.057,26.093L24.057,26.987L21.025,26.987L21.01,25.815C20.937,23.75 21.831,22.431 23.838,21.23C25.61,20.161 26.24,19.311 26.24,17.802C26.24,16.147 24.936,14.931 22.929,14.931C20.908,14.931 19.604,16.147 19.472,18.081L16.44,18.081C16.572,14.756 18.843,12.236 23.091,12.236C26.958,12.236 29.565,14.536 29.565,17.671C29.565,19.941 28.423,21.538 26.489,22.695M22.563,33.769C21.494,33.769 20.644,32.949 20.644,31.88C20.644,30.81 21.494,29.99 22.563,29.99C23.662,29.99 24.497,30.81 24.497,31.88C24.497,32.949 23.662,33.769 22.563,33.769M23.003,0.003C10.32,0.003 0.003,10.32 0.003,23.003C0.003,35.685 10.32,46.003 23.003,46.003C35.685,46.003 46.003,35.685 46.003,23.003C46.003,10.32 35.685,0.003 23.003,0.003" style="fill:rgb(198,203,207);"/>
                         </g>
                     </svg>
 
-                    <svg height="16" class="octicon gitanchor-anchor-icon-status anchorPending" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                    <svg height="16" class="octicon gitanchor-anchor-icon-status gitanchor-anchor-icon-status-pending" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
                         <g id="Progress-Spinner" serif:id="Progress Spinner" transform="matrix(0.0544181,0,0,0.0544181,-6.96498,-5.33244)">
                             <path d="M248.463,387.551C257.215,389.18 266.098,390 275,390C355.028,390 420,325.028 420,245C420,164.972 355.028,100 275,100C226.068,100 180.437,124.679 153.652,165.629L196.4,193.59C213.749,167.065 243.306,151.08 275,151.08C326.836,151.08 368.92,193.164 368.92,245C368.92,296.836 326.836,338.92 275,338.92C269.234,338.92 263.48,338.389 257.811,337.334L248.463,387.551Z" style="fill:rgb(137,146,157);"/>
                         </g>
@@ -149,7 +149,24 @@
                     <span class="dropdown-caret"></span>
                 </summary>
 
-                <div class="anim-scale-in anchorAvailableDetails" style="display: none; position: relative; z-index: 200;">
+                <div class="anim-scale-in gitanchor-anchor-details-unknown" style="display: none; position: relative; z-index: 200;">
+                    <div class="dropdown-menu dropdown-menu-s py-0 color-fg-default text-left">
+                        <div class="p-3 signed-commit-header d-flex">
+                            <div class="flex-1">
+                                This commit could not be verified.
+                            </div>
+                        </div>
+
+                        <div class="signed-commit-footer p-3 rounded-bottom-2">
+                            <span class="d-block">Network: <br /><span class="color-fg-muted gitanchor-network-name"></span></span>
+                            <div class="my-1">
+                            </div>
+                            <a href="javascript: window.location.reload();">Please try again</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="anim-scale-in gitanchor-anchor-details-available" style="display: none; position: relative; z-index: 200;">
                     <div class="dropdown-menu dropdown-menu-s py-0 color-fg-default text-left">
                         <div class="p-3 signed-commit-header d-flex">
                             <div class="flex-1 anchorAvailableDetailsText">
@@ -166,7 +183,7 @@
                     </div>
                 </div>
 
-                <div class="anim-scale-in anchorNotAvailableDetails" style="position: relative; z-index: 200;">
+                <div class="anim-scale-in gitanchor-anchor-details-not-available" style="position: relative; z-index: 200;">
                     <div class="dropdown-menu dropdown-menu-s py-0 color-fg-default text-left">
                         <div class="p-3 signed-commit-header d-flex">
                             <div class="flex-1">
@@ -178,7 +195,7 @@
                             <span class="d-block">Network: <br /><span class="color-fg-muted gitanchor-network-name"></span></span>
                             <div class="my-1">
                             </div>
-                            <button class="btn anchorNotAvailableCreateAnchorButton">Create anchor</button>
+                            <button class="btn gitanchor-anchor-details-create-anchor-button">Create anchor</button>
                         </div>
                     </div>
                 </div>
@@ -283,7 +300,7 @@
             element.style.display = 'none';
         });
 
-        document.querySelectorAll(".anchorPending").forEach(element => {
+        document.querySelectorAll(".gitanchor-anchor-icon-status-pending").forEach(element => {
             element.style.display = (blockchainEnabled ? 'inline' : 'none');
         });
 
@@ -317,69 +334,81 @@
         updateWalletConnectionDisplay();
 
         if (blockchainEnabled) {
-            fetchAnchorsFromBlockchain();
+            fetchAllAnchorsFromBlockchain();
         }
 
     }
 
-    async function fetchAnchorsFromBlockchain() {
+    async function fetchAllAnchorsFromBlockchain() {
         let gitAnchorCommitUiElements = document.querySelectorAll(".gitanchor-commit-ui-content");
         let contract = gitAnchorContract;
         for (const anchor of gitAnchorCommitUiElements) {
-            contract.getAnchor(anchor.value).then(function (value, err) {
-
-                anchor.querySelectorAll(".gitanchor-anchor-icon-status").forEach(element => {
-                    element.style.display = 'none';
-                });
-
-                anchor.querySelector('.anchorNotAvailableDetails').style.display = 'none';
-                anchor.querySelector('.anchorAvailableDetails').style.display = 'none';
-
-                if (value[0].toNumber() !== 0) {
-                    anchor.querySelector('.anchorAvailable').style.display = 'inline';
-                    anchor.querySelector('.anchorAvailableDetails').style.display = 'block';
-
-                    let displayDate = new Date(value[0].toNumber() * 1000).toLocaleString(navigator.language, {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit',
-                    });
-                    anchor.querySelector('.anchorAvailableDetailsText').innerHTML = 'This commit has been anchored on ' + displayDate + '.';
-
-                } else {
-                    anchor.querySelector('.anchorNotAvailable').style.display = 'inline';
-                    anchor.querySelector('.anchorNotAvailableDetails').style.display = 'block';
-                    anchor.querySelector('.anchorNotAvailableCreateAnchorButton').addEventListener('click', async function (e) {
-
-                        e.preventDefault();
-
-                        anchor.querySelector('.anchorPending').style.display = 'inline';
-                        contract.setAnchor(anchor.value).then(tx => {
-                            tx.wait().then(receipt => {
-                                anchor.querySelector('.anchorPending').style.display = 'none';
-                                if(receipt.status == 1) {
-                                    anchor.querySelector('.anchorAvailable').style.display = 'inline';
-                                } else {
-                                    anchor.querySelector('.anchorNotAvailable').style.display = 'inline';
-                                }
-                            });
-                        }).catch(error => {
-                            anchor.querySelector('.anchorPending').style.display = 'none';
-                            anchor.querySelector('.anchorNotAvailable').style.display = 'inline';
-                        });
-
-                    });
-                }
-
-            }).catch(function (err) {
-                anchor.querySelector('.anchorPending').style.display = 'none';
-                anchor.querySelector('.anchorUnknown').style.display = 'inline';
-            });
+            fetchAnchorFromBlockchain(anchor);
         }
+    }
 
+    async function fetchAnchorFromBlockchain(anchor) {
+        anchor.querySelectorAll(".gitanchor-anchor-icon-status").forEach(element => {
+            element.style.display = 'none';
+        });
+        anchor.querySelector('.gitanchor-anchor-icon-status-pending').style.display = 'inline';
+
+        anchor.querySelector('.gitanchor-anchor-details-not-available').style.display = 'none';
+        anchor.querySelector('.gitanchor-anchor-details-available').style.display = 'none';
+        anchor.querySelector('.gitanchor-anchor-details-unknown').style.display = 'none';
+
+        gitAnchorContract.getAnchor(anchor.value).then(function (value, err) {
+
+            anchor.querySelector('.gitanchor-anchor-icon-status-pending').style.display = 'none';
+
+            if (value[0].toNumber() !== 0) {
+                anchor.querySelector('.gitanchor-anchor-icon-status-available').style.display = 'inline';
+                anchor.querySelector('.gitanchor-anchor-details-available').style.display = 'block';
+
+                let displayDate = new Date(value[0].toNumber() * 1000).toLocaleString(navigator.language, {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                });
+                anchor.querySelector('.anchorAvailableDetailsText').innerHTML = 'This commit has been anchored on <strong class="signed-commit-verified-label">' + displayDate + '</strong>.';
+
+            } else {
+                anchor.querySelector('.gitanchor-anchor-icon-status-not-available').style.display = 'inline';
+                anchor.querySelector('.gitanchor-anchor-details-not-available').style.display = 'block';
+                anchor.querySelector('.gitanchor-anchor-details-create-anchor-button').addEventListener('click', async function (e) {
+
+                    e.preventDefault();
+
+                    anchor.querySelectorAll(".gitanchor-anchor-icon-status").forEach(element => {
+                        element.style.display = 'none';
+                    });
+                    anchor.querySelector('.gitanchor-anchor-icon-status-pending').style.display = 'inline';
+                    gitAnchorContract.setAnchor(anchor.value).then(tx => {
+                        tx.wait().then(receipt => {
+                            fetchAnchorFromBlockchain(anchor);
+                            //anchor.querySelector('.gitanchor-anchor-icon-status-pending').style.display = 'none';
+                            //if(receipt.status == 1) {
+                            //    anchor.querySelector('.gitanchor-anchor-icon-status-available').style.display = 'inline';
+                            //} else {
+                            //    anchor.querySelector('.gitanchor-anchor-icon-status-not-available').style.display = 'inline';
+                            //}
+                        });
+                    }).catch(error => {
+                        anchor.querySelector('.gitanchor-anchor-icon-status-pending').style.display = 'none';
+                        anchor.querySelector('.gitanchor-anchor-icon-status-not-available').style.display = 'inline';
+                    });
+
+                });
+            }
+
+        }).catch(function (err) {
+            anchor.querySelector('.gitanchor-anchor-details-unknown').style.display = 'block';
+            anchor.querySelector('.gitanchor-anchor-icon-status-pending').style.display = 'none';
+            anchor.querySelector('.gitanchor-anchor-icon-status-unknown').style.display = 'inline';
+        });
     }
 
     function checkInjection() {
@@ -395,7 +424,7 @@
                     buttonGroupElement.after(gitAnchorCommitUi);
                     buttonGroupElement.classList.add("gitanchor-commit-ui");
                     gitAnchorCommitUi.querySelector('.details-reset').id = 'gitanchor-commit-menu-'+gitAnchorCommitUi.value;
-                    gitAnchorCommitUi.querySelector('.anchorNotAvailableCreateAnchorButton').setAttribute('data-toggle-for', 'gitanchor-commit-menu-'+gitAnchorCommitUi.value);
+                    gitAnchorCommitUi.querySelector('.gitanchor-anchor-details-create-anchor-button').setAttribute('data-toggle-for', 'gitanchor-commit-menu-'+gitAnchorCommitUi.value);
                 }
 
             }
