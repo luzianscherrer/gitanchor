@@ -7,15 +7,19 @@ const config: HardhatUserConfig = {
   solidity: "0.8.9",
   networks: {
     localhost: {
-      accounts: [ process.env.GOERLI_KEY ?? 'unknown' ]
+      accounts: [ process.env.DEVELOPMENT_KEY ?? 'unknown' ]
     },
     goerli: {
       url: process.env.GOERLI_URL ?? 'unknown',
-      accounts: [ process.env.GOERLI_KEY ?? 'unknown' ]
+      accounts: [ process.env.DEVELOPMENT_KEY ?? 'unknown' ]
     },
     mumbai: {
       url: process.env.MUMBAI_URL ?? 'unknown',
-      accounts: [ process.env.GOERLI_KEY ?? 'unknown' ]
+      accounts: [ process.env.DEVELOPMENT_KEY ?? 'unknown' ]
+    },
+    'optimism-goerli': {
+      url: process.env.OPTIMISM_GOERLI_URL ?? 'unknown',
+      accounts: [ process.env.DEVELOPMENT_KEY ?? 'unknown' ]
     }
   }
 };
