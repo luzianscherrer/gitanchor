@@ -35,8 +35,8 @@
     ];
     const gitAnchorSupportedNetworks = [
         { chainId: 5, chainName: 'Ethereum Goerli', chainLogo: 'gitanchor-blockchain-logo-ethereum', chainExplorer: 'https://goerli.etherscan.io', contractAddress: '0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95' },
-        { chainId: 80001, chainName: 'Polygon Mumbai', chainLogo: 'gitanchor-blockchain-logo-polygon', chainExplorer: 'https://mumbai.polygonscan.com/', contractAddress: '0x9A37F4491Fe7aF13e624F74e444DBCce5aD59Bec' },
-        { chainId: 420, chainName: 'Optimism Goerli', chainLogo: 'gitanchor-blockchain-logo-optimism', chainExplorer: 'https://goerli-optimistic.etherscan.io/', contractAddress: '0x6B9797F6aC0d5a8929f1951a1090A4a2dCF5a899' }
+        { chainId: 80001, chainName: 'Polygon Mumbai', chainLogo: 'gitanchor-blockchain-logo-polygon', chainExplorer: 'https://mumbai.polygonscan.com', contractAddress: '0x9A37F4491Fe7aF13e624F74e444DBCce5aD59Bec' },
+        { chainId: 420, chainName: 'Optimism Goerli', chainLogo: 'gitanchor-blockchain-logo-optimism', chainExplorer: 'https://goerli-optimism.etherscan.io', contractAddress: '0x6B9797F6aC0d5a8929f1951a1090A4a2dCF5a899' }
     ];
     // { chainId: 1, chainName: 'Ethereum Mainnet', chainLogo: 'gitanchor-blockchain-logo-ethereum', chainExplorer: 'https://etherscan.io', contractAddress: '0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95' },
 
