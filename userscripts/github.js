@@ -206,7 +206,7 @@
 
                         <div class="signed-commit-footer p-3 rounded-bottom-2">
                             <span class="d-block">Network: <br /><span class="color-fg-muted gitanchor-network-name"></span></span>
-                            <div class="my-1">
+                            <div class="my-3">
                             </div>
                             <button class="btn gitanchor-anchor-details-create-anchor-button">Create anchor</button>
                         </div>
