@@ -6,12 +6,13 @@ import readline from 'readline';
 
 program
     .name('gitanchor')
-    .description('CLI to handle gitanchors')
+    .description('CLI to create or verify blockchain anchors')
     .version('1.0.0');
 
 program
     .command('verify')
-    .description('verify anchor for hash')
+    .summary('verify anchor for hash')
+    .description('Verify if a hash has been anchored to the blockchain')
     .argument('[hash]', 'hash to verify')
     .option('--stdin', 'read hash from stdin')
     .option('--latest', 'use the latest Git commit hash in the current project directory')
