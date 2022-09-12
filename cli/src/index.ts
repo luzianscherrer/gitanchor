@@ -5,7 +5,7 @@ import { verify } from './commands/verify';
 
 program
     .command('verify <hash>')
-    .description('Verifies an anchor')
+    .description('verify an anchor')
     .action(verify);
 
 program.parse();
