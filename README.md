@@ -10,6 +10,12 @@ A Git commit hash is a SHA1 hash that among other data itself consists of severa
 
 GitAnchor therefore provides an easy and convenient way to proof the existence of any kind of files in combination with all the versioning features that regular Git is offering. Its convenience is achieved by a set of seamlessly integrated tools, consisting of a GitHub webapp plugin, a command line interface and a specific webapp.
 
+## ETHOnline Hackathon
+
+This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.com) taking place from September 2nd to 28th, 2022. 
+
+**The documentation is always evolving during the event...**
+
 ## Supported Blockchains
 
 | Blockchain | Purpose | Type | Contract Address |
@@ -18,13 +24,6 @@ GitAnchor therefore provides an easy and convenient way to proof the existence o
 | Cronos Testnet | Testing | Layer 1 | [0x65438AaA54141dD923C5F51E81d1aaD11daF3558](https://testnet.cronoscan.com/address/0x65438AaA54141dD923C5F51E81d1aaD11daF3558#code)
 | Polygon Mumbai | Testing | Layer 2 | [0x65438AaA54141dD923C5F51E81d1aaD11daF3558](https://mumbai.polygonscan.com/address/0x65438AaA54141dD923C5F51E81d1aaD11daF3558#code)
 | Optimism Goerli | Testing | Layer 2 | [0x65438AaA54141dD923C5F51E81d1aaD11daF3558](https://goerli-optimism.etherscan.io/address/0x65438AaA54141dD923C5F51E81d1aaD11daF3558#code)
-
-
-## ETHOnline Hackathon
-
-This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.com) taking place from September 2nd to 28th, 2022. 
-
-**The documentation is always evolving during the event...**
 
 ## Plan of Action
 
@@ -41,7 +40,7 @@ This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.co
 - [x] Cronos blockchain support
 - [ ] Web app to set and verify anchors
 - [ ] Commandline tool to set and verify anchors
-- ~~Integrate with [The Graph](https://thegraph.com/) to be able to link the emitted events on [Etherscan](https://etherscan.io)~~ Probably not needed, can be accomplished with regular indexes
+- [ ] ~~Integrate with [The Graph](https://thegraph.com/) to be able to link the emitted events on [Etherscan](https://etherscan.io)~~ This is probably not needed, it can be accomplished with regular indexes
 - [ ] [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) integration for the commandline tool
 - [ ] [GitHub Actions](https://github.com/features/actions) integration
 
