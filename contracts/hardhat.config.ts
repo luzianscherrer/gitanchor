@@ -20,6 +20,10 @@ const config: HardhatUserConfig = {
     'optimism-goerli': {
       url: process.env.OPTIMISM_GOERLI_URL ?? 'unknown',
       accounts: [ process.env.DEVELOPMENT_KEY ?? 'unknown' ]
+    },
+    'cronos-testnet': {
+      url: process.env.CRONOS_TESTNET_URL ?? 'unknown',
+      accounts: [ process.env.DEVELOPMENT_KEY ?? 'unknown' ]
     }
   }
 };
