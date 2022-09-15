@@ -3,11 +3,12 @@
 import { program } from 'commander';
 import { verify } from './commands/verify';
 import readline from 'readline';
+const pj = require('../package.json');
 
 program
-    .name('gitanchor')
-    .description('CLI to create or verify blockchain anchors')
-    .version('1.0.0');
+    .name(pj.name)
+    .description(pj.description)
+    .version(pj.version);
 
 program
     .command('verify')

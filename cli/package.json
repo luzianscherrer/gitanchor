@@ -1,7 +1,7 @@
 {
   "name": "gitanchor",
   "version": "1.0.0",
-  "description": "",
+  "description": "CLI to create or verify blockchain anchors",
   "main": "./lib/index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
@@ -10,6 +10,11 @@
   },
   "bin": {
     "gitanchor": "./lib/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luzianscherrer/gitanchor.git",
+    "directory": "cli"
   },
   "author": "",
   "license": "MIT",
