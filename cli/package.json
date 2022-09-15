@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "build": "tsc -p .",
-    "local": "npm run build && npm i -g && gitanchor"
+    "local": "npm run build && npm i -g"
   },
   "bin": {
     "gitanchor": "./lib/index.js"
