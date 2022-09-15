@@ -34,9 +34,10 @@
         "function setAnchor(string memory anchorHash) public"
     ];
     const gitAnchorSupportedNetworks = [
-        { chainId: 5, chainName: 'Ethereum Goerli', chainLogo: 'gitanchor-blockchain-logo-ethereum', chainExplorer: 'https://goerli.etherscan.io', contractAddress: '0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95' },
-        { chainId: 80001, chainName: 'Polygon Mumbai', chainLogo: 'gitanchor-blockchain-logo-polygon', chainExplorer: 'https://mumbai.polygonscan.com', contractAddress: '0x9A37F4491Fe7aF13e624F74e444DBCce5aD59Bec' },
-        { chainId: 420, chainName: 'Optimism Goerli', chainLogo: 'gitanchor-blockchain-logo-optimism', chainExplorer: 'https://goerli-optimism.etherscan.io', contractAddress: '0x6B9797F6aC0d5a8929f1951a1090A4a2dCF5a899' }
+        { chainId: 5, chainName: 'Ethereum Goerli', chainLogo: 'gitanchor-blockchain-logo-ethereum', chainExplorer: 'https://goerli.etherscan.io', contractAddress: '0x65438AaA54141dD923C5F51E81d1aaD11daF3558' },
+        { chainId: 80001, chainName: 'Polygon Mumbai', chainLogo: 'gitanchor-blockchain-logo-polygon', chainExplorer: 'https://mumbai.polygonscan.com', contractAddress: '0x65438AaA54141dD923C5F51E81d1aaD11daF3558' },
+        { chainId: 338, chainName: 'Cronos testnet', chainLogo: 'gitanchor-blockchain-logo-cronos', chainExplorer: 'https://testnet.cronoscan.com/', contractAddress: '0x65438AaA54141dD923C5F51E81d1aaD11daF3558' },
+        { chainId: 420, chainName: 'Optimism Goerli', chainLogo: 'gitanchor-blockchain-logo-optimism', chainExplorer: 'https://goerli-optimism.etherscan.io', contractAddress: '0x65438AaA54141dD923C5F51E81d1aaD11daF3558' }
     ];
     // { chainId: 1, chainName: 'Ethereum Mainnet', chainLogo: 'gitanchor-blockchain-logo-ethereum', chainExplorer: 'https://etherscan.io', contractAddress: '0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95' },
 
@@ -57,6 +58,19 @@
                 <g transform="matrix(0.03125,0,0,0.03125,0.1875,0.1875)">
                     <path d="M259.303,314.57C257.927,314.57 256.863,314.132 256.113,313.256C255.487,312.255 255.3,311.13 255.55,309.879L281.444,187.914C281.694,186.538 282.382,185.412 283.508,184.536C284.634,183.661 285.822,183.223 287.073,183.223L336.985,183.223C350.87,183.223 362.003,186.1 370.384,191.854C378.891,197.609 383.144,205.927 383.144,216.81C383.144,219.937 382.769,223.19 382.018,226.567C378.891,240.953 372.574,251.586 363.067,258.466C353.685,265.346 340.8,268.786 324.413,268.786L299.082,268.786L290.451,309.879C290.2,311.255 289.512,312.38 288.387,313.256C287.261,314.132 286.072,314.57 284.822,314.57L259.303,314.57ZM325.727,242.892C330.98,242.892 335.546,241.453 339.424,238.576C343.427,235.699 346.054,231.571 347.305,226.192C347.68,224.065 347.868,222.189 347.868,220.563C347.868,216.935 346.805,214.183 344.678,212.307C342.551,210.305 338.924,209.305 333.795,209.305L311.278,209.305L304.148,242.892L325.727,242.892Z" style="fill:white;fill-rule:nonzero;"/>
                 </g>
+            </svg>
+
+            <svg class="octicon gitanchor-blockchain-logo gitanchor-blockchain-logo-cronos" style="display: none;" height="16" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+                <g transform="matrix(0.110345,0,0,0.110345,1.37159,0.275862)">
+                    <path d="M60.093,0L-0,34.712L-0,104.114L60.093,138.803L120.14,104.114L120.14,34.712L60.093,0ZM102.349,93.83L60.093,118.236L17.814,93.83L17.814,44.972L60.093,20.567L102.349,44.972L102.349,93.83Z" style="fill:rgb(0,45,116);fill-rule:nonzero;"/>
+                    <path d="M60.093,138.803L120.14,104.114L120.14,34.712L60.093,0L60.093,20.59L102.349,44.996L102.349,93.854L60.093,118.236L60.093,138.803Z" style="fill:url(#_Linear1);fill-rule:nonzero;"/>
+                    <path d="M60.047,0L0,34.689L0,104.091L60.047,138.803L60.047,118.213L17.791,93.807L17.791,44.949L60.047,20.567L60.047,0Z" style="fill:url(#_Linear2);fill-rule:nonzero;"/>
+                    <path d="M88.116,85.618L60.07,101.811L32,85.618L32,53.209L60.07,36.992L88.116,53.209L76.442,59.956L60.07,50.487L43.698,59.956L43.698,78.847L60.07,88.317L76.442,78.847L88.116,85.618Z" style="fill:rgb(0,45,116);fill-rule:nonzero;"/>
+                </g>
+                <defs>
+                    <linearGradient id="_Linear1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(4.24962e-15,-69.4016,69.4016,4.24962e-15,90.1164,138.803)"><stop offset="0" style="stop-color:rgb(0,45,116);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(0,45,116);stop-opacity:0"/></linearGradient>
+                    <linearGradient id="_Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(4.24961e-15,69.4014,-69.4014,4.24961e-15,30.0233,0)"><stop offset="0" style="stop-color:rgb(0,45,116);stop-opacity:1"/><stop offset="1" style="stop-color:rgb(0,45,116);stop-opacity:0"/></linearGradient>
+                </defs>
             </svg>
 
             <svg class="octicon gitanchor-blockchain-logo gitanchor-blockchain-logo-polygon" style="display: none;" height="16" viewBox="0 0 16 16"
@@ -354,7 +368,6 @@
 
     async function fetchAllAnchorsFromBlockchain() {
         let gitAnchorCommitUiElements = document.querySelectorAll(".gitanchor-commit-ui-content");
-        let contract = gitAnchorContract;
         for (const anchor of gitAnchorCommitUiElements) {
             fetchAnchorFromBlockchain(anchor);
         }
@@ -402,12 +415,6 @@
                     gitAnchorContract.setAnchor(anchor.value).then(tx => {
                         tx.wait().then(receipt => {
                             fetchAnchorFromBlockchain(anchor);
-                            //anchor.querySelector('.gitanchor-anchor-icon-status-pending').style.display = 'none';
-                            //if(receipt.status == 1) {
-                            //    anchor.querySelector('.gitanchor-anchor-icon-status-available').style.display = 'inline';
-                            //} else {
-                            //    anchor.querySelector('.gitanchor-anchor-icon-status-not-available').style.display = 'inline';
-                            //}
                         });
                     }).catch(error => {
                         anchor.querySelector('.gitanchor-anchor-icon-status-pending').style.display = 'none';

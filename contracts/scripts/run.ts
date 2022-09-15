@@ -42,9 +42,7 @@ async function createAnchor() {
 }
 
 async function showLogs() {
-    // const contractAddress = await questionContractAddress();
-    //const contractAddress = '0xC3524D9C7bb54929fd7049075Bc2fa05Ba96dF95';
-    const contractAddress = '0x74f4D3EE61950b5feB9a9CEfF56d6fF94A4A4f80';
+    const contractAddress = '0x65438AaA54141dD923C5F51E81d1aaD11daF3558';
     const blockchainExplorer = 'https://goerli.etherscan.io';
 
     const GitAnchor = await ethers.getContractFactory("GitAnchor");
