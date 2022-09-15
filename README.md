@@ -20,7 +20,12 @@ This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.co
 
 ### GitHub Webapp Plug-In
 
+![Screenshot of the Github Plug-In](/assets/screenshots/github-plugin.png?raw=true "Github plug-in connected to Ethereum Goerli")
+
 ### Command Line Interface (CLI)
+
+![Screenshot of the CLI](/assets/screenshots/cli.png?raw=true "Screenshot of the CLI showing various operations")
+
 
 ## Supported Blockchains
 
