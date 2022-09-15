@@ -16,6 +16,12 @@ This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.co
 
 **The documentation is always evolving during the event...**
 
+## Components
+
+### GitHub Webapp Plug-In
+
+### Command Line Interface (CLI)
+
 ## Supported Blockchains
 
 | Blockchain | Purpose | Type | Contract Address |
@@ -39,7 +45,7 @@ This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.co
 - [x] Optimism blockchain support
 - [x] Cronos blockchain support
 - [ ] Web app to set and verify anchors
-- [ ] Commandline tool to set and verify anchors
+- [x] Commandline tool to set and verify anchors
 - [ ] ~~Integrate with [The Graph](https://thegraph.com/) to be able to link the emitted events on [Etherscan](https://etherscan.io)~~ This is probably not needed, it can be accomplished with regular indexes
 - [ ] [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) integration for the commandline tool
 - [ ] [GitHub Actions](https://github.com/features/actions) integration
