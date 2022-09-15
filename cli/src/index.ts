@@ -3,6 +3,7 @@
 import { program } from 'commander';
 import { verify } from './commands/verify';
 import { create } from './commands/create';
+import { newwallet } from './commands/newwallet';
 import readline from 'readline';
 const pj = require('../package.json');
 
@@ -81,6 +82,14 @@ program
         } else {
             console.log('Please indicate the hash to be anchored');
         }
+    });
+
+program
+    .command('newwallet')
+    .summary('create a new wallet')
+    .description('Create a new wallet to pay for the network fees when creating anchors')
+    .action(() => {
+        newwallet(globalOptionDebugEnabled);
     });
 
 program.parse();
