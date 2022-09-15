@@ -15,7 +15,6 @@ program
     .option('-d, --debug', 'output extra debugging in case of errors')
     .on('option:debug', function() {
         globalOptionDebugEnabled = true;
-        console.log('debugging enabled');
     });
 
 program
@@ -25,8 +24,8 @@ program
     .argument('[hash]', 'hash to verify')
     .option('--stdin', 'read hash from stdin')
     .option('--latest', 'use the latest Git commit hash in the current project directory')
-    .option('--silent', 'suppress output; returns 0 when anchor is set, 2 otherwise')
-    .action((hash, options, third) => {
+    .option('--silent', 'suppress output; returns 0 when anchor is set, 2 when it is not set and 1 on error')
+    .action((hash, options) => {
         if(options.stdin) {
             const rl = readline.createInterface({
                 input: process.stdin
@@ -58,7 +57,7 @@ program
     .argument('[hash]', 'hash to anchor')
     .option('--stdin', 'read hash from stdin')
     .option('--latest', 'use the latest Git commit hash in the current project directory')
-    .option('--silent', 'suppress output; returns 0 on success, 2 otherwise')
+    .option('--silent', 'suppress output; returns 0 on success and 1 on error')
     .action((hash, options) => {
         if(options.stdin) {
             const rl = readline.createInterface({
@@ -66,19 +65,19 @@ program
             });            
             rl.on('line', function(line){
                 rl.close();
-                create(line, options.silent);
+                create(line, options.silent, globalOptionDebugEnabled);
             })            
         } else if(options.latest) {
             const exec = require('child_process').exec
             exec('git rev-parse HEAD', (err: any, stdout: any, stderr: any) => {
                 if(!err) { 
-                    create(stdout.trim(), options.silent)
+                    create(stdout.trim(), options.silent, globalOptionDebugEnabled)
                 } else {
                     console.log('Could not determine the latest Git commit; are you in a Git project directory?'); 
                 }
             });
         } else if(hash) {
-            create(hash, options.silent);
+            create(hash, options.silent, globalOptionDebugEnabled);
         } else {
             console.log('Please indicate the hash to be anchored');
         }

@@ -9,6 +9,7 @@ export async function verify(hash: string, silent: boolean, debug: boolean) {
         const gitAnchorContract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
         let value: any;
         try {
+            if(!silent) console.log(`Querying the blockchain...`);
             value = await gitAnchorContract.getAnchor(hash);
         } catch(error) {
             console.log('An error has occured');
