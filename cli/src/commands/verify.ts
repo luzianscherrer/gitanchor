@@ -1,10 +1,13 @@
 import { ethers } from "ethers";
-import { CONTRACT_ADDRESS, CONTRACT_ABI } from "../constants"
+import { CONTRACT_ADDRESS, CONTRACT_ABI, BLOCKCHAINS } from "../constants"
 import dotenv from 'dotenv';
 dotenv.config({ path: '~/.gitanchor' });
 
 export async function verify(hash: string, silent: boolean, debug: boolean) {
-    if(process.env.RPC_PROVIDER) {
+
+    const blockchain = BLOCKCHAINS.find((chain) => chain.id === Number(process.env.CHAIN_ID));
+
+    if(process.env.RPC_PROVIDER && blockchain) {
         const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_PROVIDER);
         const gitAnchorContract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, provider);
         let value: any;
@@ -30,20 +33,20 @@ export async function verify(hash: string, silent: boolean, debug: boolean) {
             if(!silent) console.log(`The hash ${hash} is not anchored`);
             process.exit(2);
         }
-        if(process.env.BLOCK_EXPLORER) {
-            try {
-                const queryResults = await gitAnchorContract.queryFilter(gitAnchorContract.filters.Anchored(hash), 0);
-                for(let event of queryResults) {
-                    if(!silent) console.log(`View on block explorer: ${process.env.BLOCK_EXPLORER.replace(/\/$/, '') }/tx/${event.transactionHash}#eventlog`);
-                }            
-            } catch(error) {
-                console.log('The transaction log entry could not be retrieved')
-                if(debug) console.log(error);
-            }
+        try {
+            const queryResults = await gitAnchorContract.queryFilter(gitAnchorContract.filters.Anchored(hash), 0);
+            for(let event of queryResults) {
+                if(!silent) console.log(`View details: ${blockchain.explorer.replace(/\/$/, '') }/tx/${event.transactionHash}#eventlog`);
+            }            
+        } catch(error) {
+            console.log('The transaction log entry could not be retrieved')
+            if(debug) console.log(error);
         }
         process.exit(0);
-    } else {
+    } else if(process.env.RPC_PROVIDER === undefined) {
         console.log(`No RPC_PROVIDER found in ~/.gitanchor config file`);
+    } else if(blockchain === undefined) {
+        console.log(`CHAIN_ID ${process.env.CHAIN_ID} as defined in ~/.gitanchor is not supported`);
     }
 
 }
