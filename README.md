@@ -26,6 +26,9 @@ This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.co
 
 ![Screenshot of the CLI](/assets/screenshots/cli.png?raw=true "Screenshot of the CLI showing various operations")
 
+### Web Application
+
+[https://luzianscherrer.github.io/gitanchor](https://luzianscherrer.github.io/gitanchor)
 
 ## Supported Blockchains
 
