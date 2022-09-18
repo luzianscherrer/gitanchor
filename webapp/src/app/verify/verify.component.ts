@@ -14,9 +14,7 @@ export class VerifyComponent implements OnInit {
   }
 
   Connect() {
-    this.web3.connectAccount().then(response => {
-      console.log(response);
-    })
+    this.web3.connectAccount();
   }
 
 }

@@ -21,6 +21,10 @@ export class Web3Service {
       providerOptions
     });
 
+    if(this.web3Modal.cachedProvider) {
+      this.connectAccount();
+   }
+
   }
 
   async connectAccount() {
@@ -29,7 +33,7 @@ export class Web3Service {
     this.signer = this.provider.getSigner();
 
     [this.account] = await this.provider.listAccounts();
-    return this.account;
+    console.log(`Connected to ${this.account}`);
   }
 
 }
