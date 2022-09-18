@@ -24,7 +24,22 @@ This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.co
 
 ### Command Line Interface (CLI)
 
-![Screenshot of the CLI](/assets/screenshots/cli.png?raw=true "Screenshot of the CLI showing various operations")
+```
+Usage: gitanchor [options] [command]
+
+CLI to create or verify blockchain anchors
+
+Options:
+  -V, --version            output the version number
+  -d, --debug              output extra debugging in case of errors
+  -h, --help               display help for command
+
+Commands:
+  verify [options] [hash]  verify anchor for hash
+  create [options] [hash]  create anchor for hash
+  newwallet                create a new wallet
+  help [command]           display help for command
+```
 
 ### Web Application
 
