@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { VerifyComponent } from './verify/verify.component';
+import { AnchorComponent } from './anchor/anchor.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    VerifyComponent
+    AnchorComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

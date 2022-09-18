@@ -1,7 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable, of } from 'rxjs';
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
+import { Anchor } from '../anchor';
+import { AnchorComponent } from '../anchor/anchor.component';
+
+const CONTRACT_ADDRESS = '0x65438AaA54141dD923C5F51E81d1aaD11daF3558';
+const BLOCKCHAINS = [
+    { id: 5,      name: 'Ethereum Goerli',  explorer: 'https://goerli.etherscan.io',           coinSymbol: 'ETH',    geckoApiId: 'ethereum'},
+    { id: 80001,  name: 'Polygon Mumbai',   explorer: 'https://mumbai.polygonscan.com',        coinSymbol: 'MATIC',  geckoApiId: 'matic-network'},
+    { id: 338,    name: 'Cronos testnet',   explorer: 'https://testnet.cronoscan.com',         coinSymbol: 'CRO',    geckoApiId: 'crypto-com-chain'},
+    { id: 420,    name: 'Optimism Goerli',  explorer: 'https://goerli-optimism.etherscan.io',  coinSymbol: 'ETH',    geckoApiId: 'ethereum'}
+];
+const CONTRACT_ABI = [
+    "function getAnchor(string memory anchorHash) public view returns (uint256, address)",
+    "function setAnchor(string memory anchorHash) public",
+    "event Anchored(string indexed anchorHashIndexed, string anchorHashReadable, uint256 indexed anchorTimestamp, address indexed anchorOrigin)"
+];
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +29,7 @@ export class Web3Service {
   signer: any;
   account: any;
   network: any;
+  contract: any;
 
   constructor() { 
     const providerOptions = { };
@@ -34,6 +50,7 @@ export class Web3Service {
     this.signer = this.provider.getSigner();
     [this.account] = await this.provider.listAccounts();
     this.network = await this.provider.getNetwork();
+    this.contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, this.signer);
     if(this.account) {
       this.connectionObservable.next(true);
       console.log(`Connected to ${this.account} (${this.network.name})`);
@@ -47,7 +64,6 @@ export class Web3Service {
   async disconnectAccount() {
     this.web3Modal.clearCachedProvider();
     this.connectionObservable.next(false);
-    console.log('disco');
   }
 
   async connectAccount() {
@@ -73,6 +89,29 @@ export class Web3Service {
     });
 
     this.updateConnectionState();
+  }
+
+  verifyAnchor(hash: string): Observable<Anchor> {
+    return new Observable(subscriber => {
+      this.contract.getAnchor(hash).then(function(value:any) {   
+        let anchor: Anchor = { timestamp: value[0].toNumber(), creator: value[1] };      
+        subscriber.next(anchor); 
+      }).catch(function(error:any) {
+        subscriber.error(error);
+      });  
+    });
+  }
+
+  createAnchor(hash: string): Observable<string> {
+    return new Observable(subscriber => {
+      this.contract.setAnchor(hash).then(function(tx:any) {
+        tx.wait().then(function(receipt:any) {
+          subscriber.next(receipt.transactionHash);   
+        })
+      }).catch(function(error:any) {
+        subscriber.error(error);   
+      });
+    });
   }
 
 }

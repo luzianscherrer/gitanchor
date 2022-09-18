@@ -1,0 +1,15 @@
+<p>
+    <button (click)="walletAction()">{{ walletButtonTitle }}</button>
+    {{ walletConnectionDisplay }}
+</p>
+
+<p>
+    <label for="anchor">Anchor: </label>
+    <input id="anchor" [(ngModel)]="hash" size="40" placeholder="Hash">
+    <button type="button" [disabled]="!connected || hash === undefined || hash.length === 0" (click)="verifyAction()">Verify</button>
+    <button type="button" [disabled]="!connected || hash === undefined || hash.length === 0" (click)="createAction()">Create</button>
+</p>
+
+<p>
+    {{ statusDisplay }}
+</p>
