@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
@@ -7,7 +7,7 @@ import Web3Modal from "web3modal";
   providedIn: 'root'
 })
 export class Web3Service {
-  public accountObservable = new Subject<string>();
+  public connectionObservable = new Subject<boolean>();
   web3Modal: any;
   connection: any;
   provider: any;
@@ -34,19 +34,23 @@ export class Web3Service {
     this.signer = this.provider.getSigner();
     [this.account] = await this.provider.listAccounts();
     this.network = await this.provider.getNetwork();
-    this.accountObservable.next(this.account);
     if(this.account) {
+      this.connectionObservable.next(true);
       console.log(`Connected to ${this.account} (${this.network.name})`);
     } else {
+      this.connectionObservable.next(false);
       console.log(`Not connected`);
     }
     
   }
 
+  async disconnectAccount() {
+    this.web3Modal.clearCachedProvider();
+    this.connectionObservable.next(false);
+    console.log('disco');
+  }
+
   async connectAccount() {
-
-    if(this.connection) return;
-
     this.connection = await this.web3Modal.connect();
 
     this.connection.on("accountsChanged", (accounts: any) => {

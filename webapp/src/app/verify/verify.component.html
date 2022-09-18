@@ -1,2 +1,11 @@
-<p>Verify</p>
-<button (click)="connectWallet()">{{ walletButtonTitle }}</button>
+<p>
+<button (click)="walletAction()">{{ walletButtonTitle }}</button>
+{{ walletConnectionDisplay }}
+</p>
+
+<p>
+<label for="anchor">Anchor: </label>
+<input id="anchor" value="" placeholder="Hash">
+<button type="button" [disabled]="!connected" (click)="verifyAction()">Verify</button>
+<button type="button" [disabled]="!connected" (click)="createAction()">Create</button>
+</p>
