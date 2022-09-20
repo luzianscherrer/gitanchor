@@ -1,15 +1,60 @@
-<p>
-    <button (click)="walletAction()">{{ walletButtonTitle }}</button>
-    {{ walletConnectionDisplay }}
-</p>
+<div fxLayout fxLayout.xs="column" fxLayoutGap="10px">
+    <div fxFlex fxHide.lt-sm>
+    </div>
+    <div fxFlex="nogrow">
+        {{ walletConnectionDisplay }}
+    </div>
+    <div fxFlex="nogrow">
+         <button mat-flat-button color="primary" (click)="walletAction()">{{ walletButtonTitle }}</button>
+    </div>
+</div>
 
-<p>
-    <label for="anchor">Anchor: </label>
-    <input id="anchor" [(ngModel)]="hash" size="40" placeholder="Hash">
-    <button type="button" [disabled]="!connected || hash === undefined || hash.length === 0" (click)="verifyAction()">Verify</button>
-    <button type="button" [disabled]="!connected || hash === undefined || hash.length === 0" (click)="createAction()">Create</button>
-</p>
+<div fxLayout fxLayoutAlign="center center" style="min-height: 70vh;">
 
-<p>
-    {{ statusDisplay }}
-</p>
+    <mat-card style="width: min(800px, 100%);">
+
+
+        <mat-card-title>Welcome to GitAnchor</mat-card-title>
+
+        <div fxLayout fxLayout="column">
+
+            <div>
+
+                <mat-card-content>
+                    {{ statusDisplay }}
+                </mat-card-content>
+
+                <mat-form-field class="hash-form-field" appearance="fill" style="width: 100%;">
+                    <mat-label>Hash</mat-label>
+                    <input matInput type="text" [(ngModel)]="hash">
+                    <button *ngIf="hash" matSuffix mat-icon-button aria-label="Clear" (click)="hash=''">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </mat-form-field>
+
+            </div>
+
+            <div fxLayout fxLayout="row" style="margin-bottom: 20px;">
+
+                <div fxFlex="none">
+                    <button mat-flat-button color="primary"
+                        [disabled]="!connected || hash === undefined || hash.length === 0"
+                        (click)="verifyAction()">Verify</button>
+                </div>
+                <div fxFlex></div>
+                <div fxFlex="nogrow">
+                    <button mat-flat-button color="warn"
+                        [disabled]="!connected || hash === undefined || hash.length === 0"
+                        (click)="createAction()">Create</button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <mat-card-footer>
+            <mat-progress-bar mode="indeterminate" *ngIf="isRunning"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+
+</div>

@@ -10,8 +10,9 @@ export class AnchorComponent implements OnInit {
   walletButtonTitle: string;
   walletConnectionDisplay: string;
   connected = false;
-  statusDisplay = '';
+  statusDisplay = 'Please enter a hash';
   @Input() hash?: string;
+  isRunning = false;
 
   constructor(private web3: Web3Service) { 
     this.walletButtonTitle = 'Connect wallet';
@@ -23,7 +24,7 @@ export class AnchorComponent implements OnInit {
         this.connected = connected;
         if(this.connected) {
           this.walletButtonTitle = 'Disconnect wallet';
-          this.walletConnectionDisplay = `Connected to ${this.truncateEthereumAddress(this.web3.account)} (Chain Id ${this.web3.network.chainId})`;
+          this.walletConnectionDisplay = `${this.truncateEthereumAddress(this.web3.account)} (Chain Id ${this.web3.network.chainId})`;
         } else {
           this.walletButtonTitle = 'Connect wallet';
           this.walletConnectionDisplay = 'Not connected';
@@ -50,11 +51,13 @@ export class AnchorComponent implements OnInit {
 
   verifyAction() {
     if(this.hash) {
+      this.isRunning = true;
       this.statusDisplay = 'Querying the blockchain...';
       console.log('Verify', this.hash);
       let that = this;
       this.web3.verifyAnchor(this.hash).subscribe(
         anchor => {
+          this.isRunning = false;
           if(anchor.timestamp === 0) {
             that.statusDisplay = `The hash ${that.hash} is not anchored`;
           } else {
@@ -62,6 +65,7 @@ export class AnchorComponent implements OnInit {
           }
         },
         error => {
+          this.isRunning = false;
           that.statusDisplay = `The transaction has failed`;
         }
       );  
@@ -70,14 +74,17 @@ export class AnchorComponent implements OnInit {
 
   createAction() {
     if(this.hash) {
+      this.isRunning = true;
       this.statusDisplay = 'Waiting for the transaction to complete...';
       console.log('Create', this.hash);
       let that = this;
       this.web3.createAnchor(this.hash).subscribe(
         result => {
+          this.isRunning = false;
           that.statusDisplay = `The hash ${that.hash} has been anchored with transaction ${result}`;
         },
         error => {
+          this.isRunning = false;
           that.statusDisplay = `The transaction has failed`;
         }
       );  
