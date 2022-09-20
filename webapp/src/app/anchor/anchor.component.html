@@ -1,27 +1,39 @@
 <div fxLayout fxLayout.xs="column" fxLayoutGap="10px">
     <div fxFlex fxHide.lt-sm>
     </div>
-    <div fxFlex="nogrow">
-        {{ walletConnectionDisplay }}
+    <div fxFlex="nogrow" align="right">
+        {{ walletAddress }}<br>
+        <div style="color: #626262;" class="mat-small">{{ blockchain?.name }}</div>
     </div>
     <div fxFlex="nogrow">
          <button mat-flat-button color="accent" (click)="walletAction()">{{ walletButtonTitle }}</button>
     </div>
 </div>
 
-<div fxLayout fxLayoutAlign="center center" style="min-height: 70vh;">
+<div fxLayout="column" fxLayoutAlign="center center" style="min-height: 70vh; margin-top: 10px;">
 
     <mat-card style="width: min(800px, 100%);">
 
+        <img src="assets/gitanchor-logo.svg" style="margin-top: 5px; margin-bottom: 15px; width: 30px;">
 
-        <mat-card-title>Welcome to GitAnchor</mat-card-title>
+        <mat-card-title>GitAnchor</mat-card-title>
 
         <div fxLayout fxLayout="column">
 
             <div>
 
-                <mat-card-content>
-                    {{ statusDisplay }}
+                <mat-card-content style="margin-bottom: 30px;">
+                    <div>{{ statusDisplay }}</div>
+                    <div *ngIf="anchor">
+                        <br>
+                        <b>Date:</b> {{ anchor.timestamp | date:"fullDate" }}<br>
+                        <b>Time:</b> {{ anchor.timestamp | date:"mediumTime" }}<br>
+                        <b>Creator:</b> {{ anchor.creator }} <a href="{{ blockchain?.explorer }}/address/{{ anchor.creator }}" target="_blank" class="mat-small">View in explorer</a>
+                    </div>
+                    <div *ngIf="createTransaction">
+                        <br>
+                        <b>Transaction:</b> {{ createTransaction }} <a href="{{ blockchain?.explorer }}/tx/{{ createTransaction }}" target="_blank"  class="mat-small">View in explorer</a><br>
+                    </div>
                 </mat-card-content>
 
                 <mat-form-field class="hash-form-field" appearance="fill" style="width: 100%;">
@@ -39,22 +51,27 @@
                 <div fxFlex></div>
                 <div fxFlex="nogrow">
                     <button mat-stroked-button color="primary"
-                        [disabled]="!connected || hash === undefined || hash.length === 0"
+                        [disabled]="!connected || isRunning || hash === undefined || hash.length === 0"
                         (click)="verifyAction()">Verify Anchor</button>
                 </div>
                 <div fxFlex="nogrow">
                     <button mat-flat-button color="primary"
-                        [disabled]="!connected || hash === undefined || hash.length === 0"
+                        [disabled]="!connected || isRunning ||hash === undefined || hash.length === 0"
                         (click)="createAction()">Create Anchor</button>
                 </div>
             </div>
-
 
         </div>
 
         <mat-card-footer>
             <mat-progress-bar mode="indeterminate" *ngIf="isRunning"></mat-progress-bar>
         </mat-card-footer>
+
     </mat-card>
 
+
+    <div style="padding-top: 10px;">
+        <a href="https://github.com/luzianscherrer/gitanchor" target="_blank" class="mat-small" style="color: #626262;">Documentation & source code on GitHub</a> &middot;
+        <a href="https://goerli.etherscan.io/address/0x65438aaa54141dd923c5f51e81d1aad11daf3558#code" target="_blank" class="mat-small" style="color: #626262;">Deployed contract source code</a>
+    </div>
 </div>

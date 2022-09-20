@@ -3,7 +3,7 @@ import { Subject, Observable, of } from 'rxjs';
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import { Anchor } from '../anchor';
-import { AnchorComponent } from '../anchor/anchor.component';
+import { Blockchain } from '../blockchain';
 
 const CONTRACT_ADDRESS = '0x65438AaA54141dD923C5F51E81d1aaD11daF3558';
 const BLOCKCHAINS = [
@@ -30,6 +30,7 @@ export class Web3Service {
   account: any;
   network: any;
   contract: any;
+  blockchain?: Blockchain;
 
   constructor() { 
     const providerOptions = { };
@@ -52,9 +53,16 @@ export class Web3Service {
     this.network = await this.provider.getNetwork();
     this.contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, this.signer);
     if(this.account) {
+      const chain = BLOCKCHAINS.find((chain) => chain.id === Number(this.network.chainId));
+      if(chain) {
+        this.blockchain = chain;
+      } else {
+        this.blockchain = { id: 0, name: 'Unsupported network', explorer: '', coinSymbol: '', geckoApiId: ''};
+      }
       this.connectionObservable.next(true);
       console.log(`Connected to ${this.account} (${this.network.name})`);
     } else {
+      this.blockchain = undefined;
       this.connectionObservable.next(false);
       console.log(`Not connected`);
     }
@@ -94,7 +102,7 @@ export class Web3Service {
   verifyAnchor(hash: string): Observable<Anchor> {
     return new Observable(subscriber => {
       this.contract.getAnchor(hash).then(function(value:any) {   
-        let anchor: Anchor = { timestamp: value[0].toNumber(), creator: value[1] };      
+        let anchor: Anchor = { timestamp: value[0].toNumber()*1000, creator: value[1] };      
         subscriber.next(anchor); 
       }).catch(function(error:any) {
         subscriber.error(error);
@@ -102,15 +110,29 @@ export class Web3Service {
     });
   }
 
-  createAnchor(hash: string): Observable<string> {
+  createAnchor(hash: string): Observable<any> {
     return new Observable(subscriber => {
-      this.contract.setAnchor(hash).then(function(tx:any) {
-        tx.wait().then(function(receipt:any) {
-          subscriber.next(receipt.transactionHash);   
-        })
+
+      let that = this;
+      this.contract.getAnchor(hash).then(function(value:any) {   
+        let anchor: Anchor = { timestamp: value[0].toNumber()*1000, creator: value[1] };  
+        if(anchor.timestamp !== 0) {
+          subscriber.next(anchor); 
+        } else {
+
+          that.contract.setAnchor(hash).then(function(tx:any) {
+            tx.wait().then(function(receipt:any) {
+              subscriber.next(receipt.transactionHash);   
+            })
+          }).catch(function(error:any) {
+            subscriber.error(error);   
+          });    
+
+        }
       }).catch(function(error:any) {
-        subscriber.error(error);   
-      });
+        subscriber.error(error);
+      });  
+
     });
   }
 

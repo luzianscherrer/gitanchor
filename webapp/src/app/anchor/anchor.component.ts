@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Web3Service } from "../services/web3.service";
+import { Anchor } from '../anchor';
+import { Blockchain } from '../blockchain';
+
 
 @Component({
   selector: 'app-anchor',
@@ -8,15 +11,17 @@ import { Web3Service } from "../services/web3.service";
 })
 export class AnchorComponent implements OnInit {
   walletButtonTitle: string;
-  walletConnectionDisplay: string;
   connected = false;
-  statusDisplay = 'Please enter a hash';
+  statusDisplay = 'Please enter a hash to verify or create an anchor on the blockchain';
   @Input() hash?: string;
   isRunning = false;
+  anchor?: Anchor;
+  createTransaction?: string;
+  walletAddress?: string;
+  blockchain?: Blockchain;
 
   constructor(private web3: Web3Service) { 
     this.walletButtonTitle = 'Connect wallet';
-    this.walletConnectionDisplay = 'Not connected';
 
     web3.connectionObservable.subscribe({
       next: (connected) => { 
@@ -24,10 +29,12 @@ export class AnchorComponent implements OnInit {
         this.connected = connected;
         if(this.connected) {
           this.walletButtonTitle = 'Disconnect wallet';
-          this.walletConnectionDisplay = `${this.truncateEthereumAddress(this.web3.account)} (Chain Id ${this.web3.network.chainId})`;
+          this.walletAddress = this.truncateEthereumAddress(this.web3.account);
+          this.blockchain = this.web3.blockchain;
         } else {
           this.walletButtonTitle = 'Connect wallet';
-          this.walletConnectionDisplay = 'Not connected';
+          this.walletAddress = undefined;
+          this.blockchain = undefined;
         }
       }
     });    
@@ -49,9 +56,15 @@ export class AnchorComponent implements OnInit {
     }
   }
 
+  clearState() {
+    this.anchor = undefined;
+    this.createTransaction = undefined;
+  }
+
   verifyAction() {
     if(this.hash) {
       this.isRunning = true;
+      this.clearState();
       this.statusDisplay = 'Querying the blockchain...';
       console.log('Verify', this.hash);
       let that = this;
@@ -61,7 +74,8 @@ export class AnchorComponent implements OnInit {
           if(anchor.timestamp === 0) {
             that.statusDisplay = `The hash ${that.hash} is not anchored`;
           } else {
-            that.statusDisplay = `The hash ${that.hash} has been anchored on ${new Date(anchor.timestamp*1000)}`;
+            that.anchor = anchor;
+            that.statusDisplay = `The hash ${that.hash} has been anchored`;
           }
         },
         error => {
@@ -75,13 +89,22 @@ export class AnchorComponent implements OnInit {
   createAction() {
     if(this.hash) {
       this.isRunning = true;
+      this.clearState();
+      this.anchor = undefined;
       this.statusDisplay = 'Waiting for the transaction to complete...';
       console.log('Create', this.hash);
       let that = this;
       this.web3.createAnchor(this.hash).subscribe(
         result => {
           this.isRunning = false;
-          that.statusDisplay = `The hash ${that.hash} has been anchored with transaction ${result}`;
+          if(typeof result === "string") {
+            that.statusDisplay = `The hash ${that.hash} has successfully been anchored`;
+            that.createTransaction = result;
+          } else {
+            that.anchor = result;
+            that.statusDisplay = `The hash ${that.hash} has already been anchored`;
+          }
+
         },
         error => {
           this.isRunning = false;
