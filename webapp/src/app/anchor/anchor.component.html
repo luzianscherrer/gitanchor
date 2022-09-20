@@ -5,7 +5,7 @@
         {{ walletConnectionDisplay }}
     </div>
     <div fxFlex="nogrow">
-         <button mat-flat-button color="primary" (click)="walletAction()">{{ walletButtonTitle }}</button>
+         <button mat-flat-button color="accent" (click)="walletAction()">{{ walletButtonTitle }}</button>
     </div>
 </div>
 
@@ -34,18 +34,18 @@
 
             </div>
 
-            <div fxLayout fxLayout="row" style="margin-bottom: 20px;">
+            <div fxLayout fxLayout="row" fxLayoutGap="10px" style="margin-bottom: 20px;">
 
-                <div fxFlex="none">
-                    <button mat-flat-button color="primary"
-                        [disabled]="!connected || hash === undefined || hash.length === 0"
-                        (click)="verifyAction()">Verify</button>
-                </div>
                 <div fxFlex></div>
                 <div fxFlex="nogrow">
-                    <button mat-flat-button color="warn"
+                    <button mat-stroked-button color="primary"
                         [disabled]="!connected || hash === undefined || hash.length === 0"
-                        (click)="createAction()">Create</button>
+                        (click)="verifyAction()">Verify Anchor</button>
+                </div>
+                <div fxFlex="nogrow">
+                    <button mat-flat-button color="primary"
+                        [disabled]="!connected || hash === undefined || hash.length === 0"
+                        (click)="createAction()">Create Anchor</button>
                 </div>
             </div>
 
