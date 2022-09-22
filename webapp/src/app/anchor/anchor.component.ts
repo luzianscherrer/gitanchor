@@ -41,8 +41,9 @@ export class AnchorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let hash = this.route.snapshot.paramMap.get('hash');
-    if(hash) this.hash = hash;
+    this.route.queryParams.subscribe(params => {
+      this.hash = params['hash'];
+    });
   }
 
   truncateEthereumAddress(address: string) {

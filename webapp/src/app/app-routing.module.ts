@@ -3,8 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AnchorComponent } from './anchor/anchor.component';
 
 const routes: Routes = [
-  { path: '', component: AnchorComponent },
-  { path: ':hash', component: AnchorComponent }
+  { path: '', component: AnchorComponent }
 ];
 
 @NgModule({

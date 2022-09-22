@@ -398,7 +398,7 @@
                 });
                 anchor.querySelector('.anchorAvailableDetailsText').innerHTML = 'This commit has been anchored on <strong class="signed-commit-verified-label">' + displayDate + '</strong>.';
 
-                anchor.querySelector(".gitanchor-webapp").href = 'https://luzianscherrer.github.io/gitanchor/'+anchor.value; 
+                anchor.querySelector(".gitanchor-webapp").href = 'https://luzianscherrer.github.io/gitanchor?hash='+anchor.value; 
 
             } else {
                 anchor.querySelector('.gitanchor-anchor-icon-status-not-available').style.display = 'inline';
