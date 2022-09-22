@@ -205,7 +205,7 @@
                             <span class="d-block">Network: <br /><span class="color-fg-muted gitanchor-network-name"></span></span>
                             <div class="my-1">
                             </div>
-                            <a href="https://luzianscherrer.github.io/gitanchor" target="_blank" class="gitanchor-network-explorer">View anchor details</a>
+                            <a href="https://luzianscherrer.github.io/gitanchor" target="_blank">View anchor details</a>
                         </div>
                     </div>
                 </div>
