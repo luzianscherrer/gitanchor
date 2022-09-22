@@ -205,7 +205,7 @@
                             <span class="d-block">Network: <br /><span class="color-fg-muted gitanchor-network-name"></span></span>
                             <div class="my-1">
                             </div>
-                            <a href="https://luzianscherrer.github.io/gitanchor" target="_blank">View anchor details</a>
+                            <a href="https://luzianscherrer.github.io/gitanchor" target="_blank" class="gitanchor-webapp">View anchor details</a>
                         </div>
                     </div>
                 </div>
@@ -311,9 +311,6 @@
             document.querySelectorAll(".gitanchor-network-name").forEach(element => {
                 element.textContent = networkInfo.chainName;
             });
-            document.querySelectorAll(".gitanchor-network-explorer").forEach(element => {
-                element.href = networkInfo.chainExplorer+'/address/'+networkInfo.contractAddress;
-            });
         } else {
             blockchainTitle.textContent = 'Warning';
             blockchainSubtitle.textContent = 'unsupported network';
@@ -400,6 +397,8 @@
                     second: '2-digit',
                 });
                 anchor.querySelector('.anchorAvailableDetailsText').innerHTML = 'This commit has been anchored on <strong class="signed-commit-verified-label">' + displayDate + '</strong>.';
+
+                anchor.querySelector(".gitanchor-webapp").href = 'https://luzianscherrer.github.io/gitanchor/'+anchor.value; 
 
             } else {
                 anchor.querySelector('.gitanchor-anchor-icon-status-not-available').style.display = 'inline';

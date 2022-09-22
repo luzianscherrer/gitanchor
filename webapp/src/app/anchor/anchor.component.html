@@ -28,7 +28,11 @@
                         <br>
                         <b>Date:</b> {{ anchor.timestamp | date:"fullDate" }}<br>
                         <b>Time:</b> {{ anchor.timestamp | date:"mediumTime" }}<br>
-                        <b>Creator:</b> {{ anchor.creator }} <a href="{{ blockchain?.explorer }}/address/{{ anchor.creator }}" target="_blank" class="mat-small">View in explorer</a>
+                        <b>Creator:</b> {{ anchor.creator }} <!--<a href="{{ blockchain?.explorer }}/address/{{ anchor.creator }}" target="_blank" class="mat-small">View in explorer</a>-->
+                        <div *ngIf="anchor.explorerLink">
+                            <br>
+                            <a href="{{ anchor.explorerLink }}" target="_blank">View transaction in blockchain explorer</a><br>
+                        </div>
                     </div>
                     <div *ngIf="createTransaction">
                         <br>

@@ -60,11 +60,9 @@ export class Web3Service {
         this.blockchain = { id: 0, name: 'Unsupported network', explorer: '', coinSymbol: '', geckoApiId: ''};
       }
       this.connectionObservable.next(true);
-      console.log(`Connected to ${this.account} (${this.network.name})`);
     } else {
       this.blockchain = undefined;
       this.connectionObservable.next(false);
-      console.log(`Not connected`);
     }
     
   }
@@ -78,21 +76,17 @@ export class Web3Service {
     this.connection = await this.web3Modal.connect();
 
     this.connection.on("accountsChanged", (accounts: any) => {
-      console.log('accountsChanged', accounts);
       this.updateConnectionState();
     });
 
     this.connection.on("chainChanged", (chainId: any) => {
-      console.log('chainChanged', chainId);
       this.updateConnectionState();
     });
 
     this.connection.on("connect", (info: any) => {
-      console.log('connect', info);
     });
 
     this.connection.on("disconnect", (error: any) => {
-      console.log('disconnect', error);
       this.updateConnectionState();
     });
 
@@ -101,9 +95,18 @@ export class Web3Service {
 
   verifyAnchor(hash: string): Observable<Anchor> {
     return new Observable(subscriber => {
+      let that = this;
       this.contract.getAnchor(hash).then(function(value:any) {   
         let anchor: Anchor = { timestamp: value[0].toNumber()*1000, creator: value[1] };      
-        subscriber.next(anchor); 
+
+        that.contract.queryFilter(that.contract.filters.Anchored(hash), 0).then(function(values: any) {
+          let event = values[0];
+          anchor.explorerLink = `${that.blockchain?.explorer.replace(/\/$/, '') }/tx/${event.transactionHash}#eventlog`
+          subscriber.next(anchor);
+        }).catch(function(error:any) {
+          subscriber.next(anchor);
+        });
+
       }).catch(function(error:any) {
         subscriber.error(error);
       });  

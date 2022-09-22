@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Web3Service } from "../services/web3.service";
 import { Anchor } from '../anchor';
 import { Blockchain } from '../blockchain';
-
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-anchor',
@@ -20,12 +20,12 @@ export class AnchorComponent implements OnInit {
   walletAddress?: string;
   blockchain?: Blockchain;
 
-  constructor(private web3: Web3Service) { 
+  constructor(private route: ActivatedRoute, private web3: Web3Service) { 
+
     this.walletButtonTitle = 'Connect wallet';
 
     web3.connectionObservable.subscribe({
       next: (connected) => { 
-        console.log(`Connection observer: ${connected}`);
         this.connected = connected;
         if(this.connected) {
           this.walletButtonTitle = 'Disconnect wallet';
@@ -41,6 +41,8 @@ export class AnchorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let hash = this.route.snapshot.paramMap.get('hash');
+    if(hash) this.hash = hash;
   }
 
   truncateEthereumAddress(address: string) {
@@ -66,7 +68,6 @@ export class AnchorComponent implements OnInit {
       this.isRunning = true;
       this.clearState();
       this.statusDisplay = 'Querying the blockchain...';
-      console.log('Verify', this.hash);
       let that = this;
       this.web3.verifyAnchor(this.hash).subscribe(
         anchor => {
@@ -92,7 +93,6 @@ export class AnchorComponent implements OnInit {
       this.clearState();
       this.anchor = undefined;
       this.statusDisplay = 'Waiting for the transaction to complete...';
-      console.log('Create', this.hash);
       let that = this;
       this.web3.createAnchor(this.hash).subscribe(
         result => {
