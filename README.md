@@ -78,9 +78,9 @@ A [live demo](https://luzianscherrer.github.io/gitanchor) is deployed on GitHub 
 - [x] Cronos blockchain support
 - [x] Web app to set and verify anchors
 - [x] Commandline tool to set and verify anchors
-- [ ] ~~Integrate with [The Graph](https://thegraph.com/) to be able to link the emitted events on [Etherscan](https://etherscan.io)~~ This is probably not needed, it can be accomplished with regular indexes
+- [ ] ~~Integrate with [The Graph](https://thegraph.com/) to be able to link the emitted events on [Etherscan](https://etherscan.io)~~ Not needed, it can be accomplished with regular logs and indexes
 - [x] [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks) integration for the commandline tool
-- [ ] [GitHub Actions](https://github.com/features/actions) integration
+- [ ] ~~[GitHub Actions](https://github.com/features/actions) integration~~ Not needed, it can be accomplished with Git Hooks
 
 ## Eat Your Own Dogfood
 
