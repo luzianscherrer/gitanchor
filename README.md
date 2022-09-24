@@ -52,6 +52,8 @@ gitanchor create --latest
 
 A [live demo](https://luzianscherrer.github.io/gitanchor) is deployed on GitHub Pages.
 
+![Screenshot of the GitAnchor webapp](/assets/screenshots/webapp.png?raw=true "GitAnchor webapp")
+
 ## Supported Blockchains
 
 | Blockchain | Purpose | Type | Contract Address |
