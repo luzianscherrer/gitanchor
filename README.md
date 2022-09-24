@@ -18,7 +18,7 @@ This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.co
 
 ## Components
 
-### GitHub Webapp Plug-In
+### GitHub Browser Plugin
 
 ![Screenshot of the Github Plug-In](/assets/screenshots/github-plugin.png?raw=true "Github plug-in connected to Ethereum Goerli")
 

@@ -6,7 +6,7 @@
         <div style="color: #626262;" class="mat-small">{{ blockchain?.name }}</div>
     </div>
     <div fxFlex="nogrow">
-         <button mat-flat-button color="accent" (click)="walletAction()">{{ walletButtonTitle }}</button>
+        <button mat-flat-button color="accent" (click)="walletAction()">{{ walletButtonTitle }}</button>
     </div>
 </div>
 
@@ -28,15 +28,19 @@
                         <br>
                         <b>Date:</b> {{ anchor.timestamp | date:"fullDate" }}<br>
                         <b>Time:</b> {{ anchor.timestamp | date:"mediumTime" }}<br>
-                        <b>Creator:</b> {{ anchor.creator }} <!--<a href="{{ blockchain?.explorer }}/address/{{ anchor.creator }}" target="_blank" class="mat-small">View in explorer</a>-->
+                        <b>Creator:</b> {{ anchor.creator }}
+                        <!--<a href="{{ blockchain?.explorer }}/address/{{ anchor.creator }}" target="_blank" class="mat-small">View in explorer</a>-->
                         <div *ngIf="anchor.explorerLink">
                             <br>
-                            <a href="{{ anchor.explorerLink }}" target="_blank">View transaction in blockchain explorer</a><br>
+                            <a href="{{ anchor.explorerLink }}" target="_blank">View transaction in blockchain
+                                explorer</a><br>
                         </div>
                     </div>
                     <div *ngIf="createTransaction">
                         <br>
-                        <b>Transaction:</b> {{ createTransaction }} <a href="{{ blockchain?.explorer }}/tx/{{ createTransaction }}" target="_blank"  class="mat-small">View in explorer</a><br>
+                        <b>Transaction:</b> {{ createTransaction }} <a
+                            href="{{ blockchain?.explorer }}/tx/{{ createTransaction }}" target="_blank"
+                            class="mat-small">View in explorer</a><br>
                     </div>
                 </mat-card-content>
 
@@ -73,8 +77,17 @@
 
     </mat-card>
 
+    <span style="padding-top: 15px;">
 
-    <div style="padding-top: 10px;">
-        <a href="https://github.com/luzianscherrer/gitanchor" target="_blank" class="mat-small" style="color: #626262;">Documentation & source code on GitHub</a>
-    </div>
+        <button mat-stroked-button color="basic" style="margin-right: 5px;"
+            onclick="window.open('https://github.com/luzianscherrer/gitanchor#github-browser-plugin', '_blank').focus();">GitHub
+            Browser Plugin</button>
+        <button mat-stroked-button color="basic" style="margin-left: 5px;"
+            onclick="window.open('https://github.com/luzianscherrer/gitanchor#command-line-interface-cli', '_blank').focus();">Commandline
+            Interface</button>
+    </span>
+    <span style="padding-top: 10px;">
+        <a href="https://github.com/luzianscherrer/gitanchor" target="_blank" class="mat-small"
+            style="color: #626262;">Documentation & source code on GitHub</a>
+    </span>
 </div>
