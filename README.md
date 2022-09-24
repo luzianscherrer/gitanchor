@@ -41,7 +41,7 @@ Commands:
   help [command]           display help for command
 ```
 
-#### Git Hook Integration
+#### Git Hooks Integration
 
 The CLI can easily be integrated with [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks). Example `.git/hooks/post-commit`:
 
