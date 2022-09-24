@@ -14,8 +14,6 @@ GitAnchor therefore provides an easy and convenient way to proof the existence o
 
 This is my contribution to the [ETHOnline Hackathon](https://online.ethglobal.com) taking place from September 2nd to 28th, 2022. 
 
-**The documentation is always evolving during the event...**
-
 ## Components
 
 ### GitHub Browser Plugin
