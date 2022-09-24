@@ -41,6 +41,10 @@ Commands:
   help [command]           display help for command
 ```
 
+#### Git Hook Integration
+
+...
+
 ### Web Application
 
 [https://luzianscherrer.github.io/gitanchor](https://luzianscherrer.github.io/gitanchor)
