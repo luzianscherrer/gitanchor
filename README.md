@@ -43,11 +43,16 @@ Commands:
 
 #### Git Hook Integration
 
-...
+The CLI can easily be integrated with [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks). Example `.git/hooks/post-commit`:
+
+```
+#!/bin/sh
+gitanchor create --latest
+```
 
 ### Web Application
 
-[https://luzianscherrer.github.io/gitanchor](https://luzianscherrer.github.io/gitanchor)
+A [live demo](https://luzianscherrer.github.io/gitanchor) is deployed on GitHub Pages.
 
 ## Supported Blockchains
 
