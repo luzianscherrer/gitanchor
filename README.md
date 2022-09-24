@@ -8,7 +8,7 @@ A GitAnchor consist of the commit hash as well as the timestamp when the anchor 
 
 A Git commit hash is a SHA1 hash that among other data itself consists of several different hashes. Those contain the parent hash, which is a pointer to the parent of the current commit, and the tree hash, which is a hash of the whole directory tree including all its files. 
 
-GitAnchor therefore provides an easy and convenient way to proof the existence of any kind of files in combination with all the versioning features that regular Git is offering. Its convenience is achieved by a set of seamlessly integrated tools, consisting of a GitHub webapp plugin, a command line interface and a specific webapp.
+GitAnchor therefore provides an easy and convenient way to proof the existence of any kind of files in combination with all the versioning features that regular Git is offering. Its convenience is achieved by a set of seamlessly integrated tools, consisting of a GitHub browser plugin, a command line interface and the GitAnchor webapp.
 
 ## ETHOnline Hackathon
 
@@ -41,7 +41,7 @@ Commands:
   help [command]           display help for command
 ```
 
-#### Git Hook Integration
+#### Git Hooks Integration
 
 The CLI can easily be integrated with [Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks). Example `.git/hooks/post-commit`:
 
